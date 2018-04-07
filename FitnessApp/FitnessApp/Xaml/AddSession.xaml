@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.AddSession"
+             Title="Add Session">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" >
+                <Label x:Name="lab_SportSess" Text="Sport type :"/>
+                <!-- <Entry x:Name="ent_sportType" /> -->
+                <Picker x:Name="pic_sportType" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" >
+                <Label x:Name="lab_dateTime" Text="Date :" />
+                <DatePicker x:Name="pic_date" />
+                <TimePicker x:Name="pic_time" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" >
+                <Label x:Name="lab_quantity" Text="Quantity :" />
+                <Entry x:Name="ent_quantity" Keyboard="Numeric" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" >
+                <Label x:Name="lab_unit" Text="Unit :" />
+                <Picker x:Name="pic_unit" />
+            </StackLayout>
+
+            <Button x:Name="btn_submit" Text="Submit" />
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

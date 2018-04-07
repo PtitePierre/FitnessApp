@@ -1,0 +1,29 @@
+﻿{
+  "sports": [
+    {
+      "id": 1,
+      "name": "plank"
+    },
+    {
+      "id": 2,
+      "name": "crunch"
+    },
+    {
+      "id": 3,
+      "name": "step"
+    },
+    {
+      "id": 4,
+      "name": "run"
+    },
+    {
+      "id": 5,
+      "name": "walk"
+    },
+    {
+      "id": 6,
+      "name": "bicycle"
+    }
+  ]
+
+}

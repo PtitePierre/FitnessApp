@@ -1,0 +1,30 @@
+﻿{
+  "units": [
+    {
+      "id": 1,
+      "code": "km",
+      "name": "kilometers"
+    },
+    {
+      "id": 2,
+      "code": "min",
+      "name": "minutes"
+    },
+    {
+      "id": 3,
+      "code": "sec",
+      "name": "secondes"
+    },
+    {
+      "id": 4,
+      "code": "h",
+      "name": "hours"
+    },
+    {
+      "id": 5,
+      "code": "it",
+      "name": "iterations"
+    }
+  ]
+
+}
