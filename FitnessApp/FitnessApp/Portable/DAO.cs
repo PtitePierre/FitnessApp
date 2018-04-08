@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.IO;
 
 namespace FitnessApp.Portable
 {
@@ -10,6 +12,7 @@ namespace FitnessApp.Portable
         {
             // TO DO
             // save a new unit in unit.json
+            
         }
 
         public void saveNewSportType()
@@ -28,7 +31,8 @@ namespace FitnessApp.Portable
         {
             Unit[] units = null;
 
-            // TO DO : Fill units
+            // TO DO : Fill units from unit.json
+            //JObject oUnit = JObject.Parse(File.ReadAllText("unit.json"));
 
             return units;
         }
@@ -37,7 +41,7 @@ namespace FitnessApp.Portable
         {
             SportType[] sports = null;
 
-            // TO DO : Fill sports
+            // TO DO : Fill sports from sport.json
 
             return sports;
         }
@@ -46,7 +50,7 @@ namespace FitnessApp.Portable
         {
             Session[] sessions = null;
 
-            // TO DO : Fill sessions
+            // TO DO : Fill sessions from session.json
 
             return sessions;
         }
