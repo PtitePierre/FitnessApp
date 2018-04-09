@@ -4,10 +4,10 @@ using System.Text;
 
 namespace FitnessApp.Portable
 {
-    class Unit
+    public class Unit
     {
-        private int Id { get; set; }
-        private string Code { get; set; }
-        private string Name { get; set; }
+        public int Id { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
     }
 }

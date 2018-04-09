@@ -1,39 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Newtonsoft.Json;
+
+using Xamarin.Forms;
+using System.Reflection;
+using System.IO;
 
 namespace FitnessApp.Portable
 {
-    class DAO
+    public static class DAO
     {
-        public void saveNewUnit()
+        public static void saveNewUnit()
         {
             // TO DO
             // save a new unit in unit.json
         }
 
-        public void saveNewSportType()
+        public static void saveNewSportType()
         {
             // TO DO
             // save a new sport type in sport.json
         }
 
-        public void saveSessions()
+        public static void saveSessions()
         {
             // TO DO
             // save all the sessions in session.json
         }
 
-        public Unit[] loadUnits()
+        public static void loadUnits(Unit[] units)
         {
-            Unit[] units = null;
 
             // TO DO : Fill units
+            // open unit.json file
+            // use it as jArray
+            // for each element from the JArray
+                // create an object of unit class
 
-            return units;
+
         }
 
-        public SportType[] loadSportTypes()
+        public static SportType[] loadSportTypes()
         {
             SportType[] sports = null;
 
@@ -42,7 +49,7 @@ namespace FitnessApp.Portable
             return sports;
         }
 
-        public Session[] loadSessions()
+        public static Session[] loadSessions()
         {
             Session[] sessions = null;
 
@@ -50,5 +57,7 @@ namespace FitnessApp.Portable
 
             return sessions;
         }
+
+        
     }
 }

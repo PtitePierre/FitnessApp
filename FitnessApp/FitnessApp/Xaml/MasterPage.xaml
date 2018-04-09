@@ -12,6 +12,7 @@
                 <x:Array Type="{x:Type local:MasterPageItem}">
                     <local:MasterPageItem Title="Add session" IconSource="" TargetType="{x:Type local:AddSession}" />
                     <local:MasterPageItem Title="View session" IconSource="" TargetType="{x:Type local:ViewSessionList}" />
+                    <local:MasterPageItem Title="View units" IconSource="" TargetType="{x:Type local:LoadUnitJson}" />
                     
                 </x:Array>
             </ListView.ItemsSource>

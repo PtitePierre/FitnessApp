@@ -27,7 +27,7 @@
                 <Picker x:Name="pic_unit" />
             </StackLayout>
 
-            <Button x:Name="btn_submit" Text="Submit" />
+            <Button x:Name="btn_submit" Text="Submit" Clicked="Button_Clicked" />
             
         </StackLayout>
     </ContentPage.Content>
