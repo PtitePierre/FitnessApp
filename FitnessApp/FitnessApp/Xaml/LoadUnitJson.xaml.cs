@@ -18,7 +18,7 @@ namespace FitnessApp
 	{
 		public LoadUnitJson ()
 		{
-            /*
+            
             #region How to load an Json file embedded resource
             var assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadResourceText)).Assembly;
 
@@ -40,11 +40,17 @@ namespace FitnessApp
             }
             catch (Exception e)
             {
-                if (Device.RuntimePlatform == Device.Android)
-                {
+                DependencyService.Get<IMessage>().longtime(e.Message);
+                Unit u1 = new Unit();
+                u1.Code = "km";
+                u1.Name = "kilometers";
+                u1.Id = 1;
+                Unit u2 = new Unit();
+                u2.Code = "min";
+                u2.Name = "minutes";
+                u2.Id = 2;
+                units = new Unit[] { u1, u2 };
 
-                    
-                }
             }
 
             #endregion

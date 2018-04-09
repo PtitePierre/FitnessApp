@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessApp.Portable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace FitnessApp
 		public GpsTracker ()
 		{
 			InitializeComponent ();
-		}
-	}
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var message = "You clicked to launche GPS tracking!";
+            DependencyService.Get<IMessage>().longtime(message);
+        }
+    }
 }

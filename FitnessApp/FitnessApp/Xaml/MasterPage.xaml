@@ -5,7 +5,7 @@
              x:Class="FitnessApp.MasterPage"
              Padding="0,40,0,0"
              Icon="hamburger.png"
-             Title="Fitness App">
+             Title="Fitness App" >
     <StackLayout>
         <ListView x:Name="listView">
             <ListView.ItemsSource>
@@ -13,6 +13,8 @@
                     <local:MasterPageItem Title="Add session" IconSource="" TargetType="{x:Type local:AddSession}" />
                     <local:MasterPageItem Title="View session" IconSource="" TargetType="{x:Type local:ViewSessionList}" />
                     <local:MasterPageItem Title="View units" IconSource="" TargetType="{x:Type local:LoadUnitJson}" />
+                    <local:MasterPageItem Title="GPS Tracker" IconSource="" TargetType="{x:Type local:GpsTracker}" />
+                    <local:MasterPageItem Title="Binding test" IconSource="" TargetType="{x:Type local:LoadResourceText}" />
                     
                 </x:Array>
             </ListView.ItemsSource>
