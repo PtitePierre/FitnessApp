@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessApp.Portable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,11 @@ namespace FitnessApp
 		{
 			InitializeComponent ();
 		}
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var message = "Test toast notification!";
+            DependencyService.Get<IMessage>().longtime(message);
+        }
 	}
 }

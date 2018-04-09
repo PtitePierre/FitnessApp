@@ -4,10 +4,9 @@ using System.Text;
 
 namespace FitnessApp.Portable
 {
-    public class SportType
+    public interface IMessage
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
-
+        void longtime(string message);
+        void shorttime(string message);
     }
 }

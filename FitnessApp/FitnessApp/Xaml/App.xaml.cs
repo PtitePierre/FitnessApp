@@ -10,6 +10,8 @@ namespace FitnessApp
 {
 	public partial class App : Application
 	{
+        private Unit[] units;
+
 		public App ()
 		{
 			InitializeComponent();
@@ -19,9 +21,10 @@ namespace FitnessApp
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
+            // Handle when your app starts
 
             // TO DO : load data
+            DAO.loadUnits(units);
 		}
 
 		protected override void OnSleep ()

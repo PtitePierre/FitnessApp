@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FitnessApp.Portable
 {
-    class Session
+    public class Session
     {
         private int Id { get; set; }
         private int Quantity { get; set; }
