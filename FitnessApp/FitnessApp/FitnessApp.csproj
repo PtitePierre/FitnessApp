@@ -6,11 +6,13 @@
 
   <ItemGroup>
     <None Remove="Data\PCLTextResource.txt" />
+    <None Remove="Data\sport.json" />
     <None Remove="Data\unit.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Data\PCLTextResource.txt" />
+    <EmbeddedResource Include="Data\sport.json" />
     <EmbeddedResource Include="Data\unit.json" />
   </ItemGroup>
 
