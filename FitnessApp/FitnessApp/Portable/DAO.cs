@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Xamarin.Forms;
 using System.Reflection;
 using System.IO;
+using System.Linq;
 
 namespace FitnessApp.Portable
 {
@@ -58,6 +59,37 @@ namespace FitnessApp.Portable
             return sessions;
         }
 
-        
+        public static string LoadText(string filename, System.Reflection.Assembly assembly)
+        {
+
+            #region How to load a text file embedded resource
+            
+            //var assembly = this.GetType().GetTypeInfo().Assembly;
+            var resources = assembly.GetManifestResourceNames();
+            var resourceName = resources.Single(r => r.EndsWith(filename, StringComparison.OrdinalIgnoreCase));
+            var stream = assembly.GetManifestResourceStream(resourceName);
+
+            string text = "";
+            try
+            {
+                using (var reader = new System.IO.StreamReader(stream))
+                {
+                    text = reader.ReadToEnd();
+                }
+            }
+            catch (Exception e)
+            {
+                DependencyService.Get<IMessage>().shorttime(e.Message);
+                text = "Echec de chargement.";
+            }
+            finally
+            {
+                DependencyService.Get<IMessage>().shorttime("End of loading");
+            }
+            #endregion
+
+            return text;
+        }
+
     }
 }

@@ -23,30 +23,10 @@ namespace FitnessApp
 
             string name = "PCLTextResource.txt";
             var assembly = this.GetType().GetTypeInfo().Assembly;
-            var resources = assembly.GetManifestResourceNames();
-            var resourceName = resources.Single(r => r.EndsWith(name, StringComparison.OrdinalIgnoreCase));
-            var stream = assembly.GetManifestResourceStream(resourceName);
 
-            string text = "";
-            try
-            {
-                using (var reader = new System.IO.StreamReader(stream))
-                {
-                    text = reader.ReadToEnd();
-                }
-            }
-            catch(Exception e)
-            {
-                DependencyService.Get<IMessage>().shorttime(e.Message);
-                text = "Echec de chargement.";
-            }
-            finally
-            {
-                DependencyService.Get<IMessage>().shorttime(text);
-            }
+            string text = DAO.LoadText(name, assembly);
+
             #endregion
-            
-
 
             InitializeComponent();
             
