@@ -20,11 +20,19 @@ namespace FitnessApp
 		{
             
             #region How to load an Json file embedded resource
+
+            /*
             var assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadResourceText)).Assembly;
-
             Stream stream = assembly.GetManifestResourceStream("unit.json");
+            */
 
-            Unit[] units;
+            string name = "unit.json";
+            var assembly = this.GetType().GetTypeInfo().Assembly;
+            var resources = assembly.GetManifestResourceNames();
+            var resourceName = resources.Single(r => r.EndsWith(name, StringComparison.OrdinalIgnoreCase));
+            var stream = assembly.GetManifestResourceStream(resourceName);
+
+            Unit[] units = null;
 
             try
             {
@@ -51,6 +59,10 @@ namespace FitnessApp
                 u2.Id = 2;
                 units = new Unit[] { u1, u2 };
 
+            }
+            finally
+            {
+                DependencyService.Get<IMessage>().shorttime(units[0].Name);
             }
 
             #endregion

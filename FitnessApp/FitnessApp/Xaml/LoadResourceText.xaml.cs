@@ -18,11 +18,14 @@ namespace FitnessApp
 
 		public LoadResourceText ()
         {
-            //var editor = new Label { Text = "loading...", HeightRequest = 300 };
 
             #region How to load a text file embedded resource
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadResourceText)).Assembly;
-            Stream stream = assembly.GetManifestResourceStream("Fitness.PCLTextResource.txt");
+
+            string name = "PCLTextResource.txt";
+            var assembly = this.GetType().GetTypeInfo().Assembly;
+            var resources = assembly.GetManifestResourceNames();
+            var resourceName = resources.Single(r => r.EndsWith(name, StringComparison.OrdinalIgnoreCase));
+            var stream = assembly.GetManifestResourceStream(resourceName);
 
             string text = "";
             try
@@ -34,30 +37,16 @@ namespace FitnessApp
             }
             catch(Exception e)
             {
-                DependencyService.Get<IMessage>().longtime(e.Message);
+                DependencyService.Get<IMessage>().shorttime(e.Message);
                 text = "Echec de chargement.";
             }
-            #endregion
-
-            //editor.Text = text;
-
-            /*
-            Content = new StackLayout
+            finally
             {
-                Padding = new Thickness(0, 20, 0, 0),
-                VerticalOptions = LayoutOptions.StartAndExpand,
-                Children = {
-                    new Label { Text = "Embedded Resource Text File (PCL)",
-                        FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Label)),
-                        FontAttributes = FontAttributes.Bold
-                    }, editor
-                }
-            };
-            */
+                DependencyService.Get<IMessage>().shorttime(text);
+            }
+            #endregion
+            
 
-            // NOTE: use for debugging, not in released app code!
-            //foreach (var res in assembly.GetManifestResourceNames()) 
-            //	System.Diagnostics.Debug.WriteLine("found resource: " + res);
 
             InitializeComponent();
 
