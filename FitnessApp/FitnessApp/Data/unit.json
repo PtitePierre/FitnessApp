@@ -1,5 +1,5 @@
-﻿{
-  "units": [
+﻿
+  [
     {
       "id": 1,
       "code": "km",
@@ -26,4 +26,4 @@
       "name": "iterations"
     }
   ]
-}
+

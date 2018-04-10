@@ -20,19 +20,14 @@ namespace FitnessApp
 		{
             
             #region How to load an Json file embedded resource
-
-            /*
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadResourceText)).Assembly;
-            Stream stream = assembly.GetManifestResourceStream("unit.json");
-            */
-
+            
             string name = "unit.json";
             var assembly = this.GetType().GetTypeInfo().Assembly;
             var resources = assembly.GetManifestResourceNames();
             var resourceName = resources.Single(r => r.EndsWith(name, StringComparison.OrdinalIgnoreCase));
             var stream = assembly.GetManifestResourceStream(resourceName);
 
-            Unit[] units = null;
+            List<Unit> units = new List<Unit>();
 
             try
             {
@@ -40,7 +35,7 @@ namespace FitnessApp
                 {
 
                     var json = reader.ReadToEnd();
-                    var rootobject = JsonConvert.DeserializeObject<Unit[]>(json);
+                    var rootobject = JsonConvert.DeserializeObject<List<Unit>>(json);
 
                     units = rootobject;
                 }
@@ -50,47 +45,28 @@ namespace FitnessApp
             {
                 DependencyService.Get<IMessage>().longtime(e.Message);
                 Unit u1 = new Unit();
-                u1.Code = "km";
-                u1.Name = "kilometers";
+                u1.Code = "ERR";
+                u1.Name = "ERROR";
                 u1.Id = 1;
-                Unit u2 = new Unit();
-                u2.Code = "min";
-                u2.Name = "minutes";
-                u2.Id = 2;
-                units = new Unit[] { u1, u2 };
+                units.Add(u1);
 
             }
             finally
             {
-                DependencyService.Get<IMessage>().shorttime(units[0].Name);
+                string msg = "";
+                foreach(Unit u in units)
+                {
+                    msg += u.Code + " ";
+                }
+                DependencyService.Get<IMessage>().shorttime(msg);
             }
 
             #endregion
-            /*
-            var listView = new ListView();
-            listView.ItemsSource = units;
 
-            /*
-            Content = new StackLayout
-            {
-                Padding = new Thickness(0, 20, 0, 0),
-                VerticalOptions = LayoutOptions.StartAndExpand,
-                Children = {
-                    new Label { Text = "Embedded Resource JSON File (PCL)",
-                        FontSize = Device.GetNamedSize (NamedSize.Medium, typeof(Label)),
-                        FontAttributes = FontAttributes.Bold
-                    }, listView
-                }
-            };
-            */
             
-
-            // NOTE: use for debugging, not in released app code!
-            //foreach (var res in assembly.GetManifestResourceNames()) 
-            //	System.Diagnostics.Debug.WriteLine("found resource: " + res);
-
-
             InitializeComponent();
+
+            // TO DO : Binding Data units to ListView
         }
     }
 }
