@@ -7,7 +7,7 @@
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <ListView x:Name="UnitList" ItemsSource="{Binding units}" />
+            <ListView x:Name="UnitList" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

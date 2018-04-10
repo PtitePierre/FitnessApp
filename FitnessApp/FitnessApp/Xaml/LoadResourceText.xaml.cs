@@ -49,12 +49,8 @@ namespace FitnessApp
 
 
             InitializeComponent();
-
-            // binding part [NOT WORKING]
-            testLabel.SetBinding(Label.TextProperty, new Binding("Valeur"));
-            contexte = new Contexte { Valeur = text };
-
-            //DataContext = contexte;
+            
+            testLabel.Text = text;
         }
 	}
 }

@@ -44,12 +44,6 @@ namespace FitnessApp
             catch (Exception e)
             {
                 DependencyService.Get<IMessage>().longtime(e.Message);
-                Unit u1 = new Unit();
-                u1.Code = "ERR";
-                u1.Name = "ERROR";
-                u1.Id = 1;
-                units.Add(u1);
-
             }
             finally
             {
@@ -67,6 +61,7 @@ namespace FitnessApp
             InitializeComponent();
 
             // TO DO : Binding Data units to ListView
+            UnitList.ItemsSource = units;
         }
     }
 }
