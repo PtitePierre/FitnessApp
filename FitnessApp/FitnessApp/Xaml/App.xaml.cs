@@ -24,7 +24,6 @@ namespace FitnessApp
             // Handle when your app starts
 
             // TO DO : load data
-            DAO.loadUnits(units);
 		}
 
 		protected override void OnSleep ()

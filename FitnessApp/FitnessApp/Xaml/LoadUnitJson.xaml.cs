@@ -18,45 +18,7 @@ namespace FitnessApp
 	{
 		public LoadUnitJson ()
 		{
-            
-            #region How to load an Json file embedded resource
-            
-            string name = "unit.json";
-            var assembly = this.GetType().GetTypeInfo().Assembly;
-            var resources = assembly.GetManifestResourceNames();
-            var resourceName = resources.Single(r => r.EndsWith(name, StringComparison.OrdinalIgnoreCase));
-            var stream = assembly.GetManifestResourceStream(resourceName);
-
-            List<Unit> units = new List<Unit>();
-
-            try
-            {
-                using (var reader = new System.IO.StreamReader(stream))
-                {
-
-                    var json = reader.ReadToEnd();
-                    var rootobject = JsonConvert.DeserializeObject<List<Unit>>(json);
-
-                    units = rootobject;
-                }
-
-            }
-            catch (Exception e)
-            {
-                DependencyService.Get<IMessage>().longtime(e.Message);
-            }
-            finally
-            {
-                string msg = "";
-                foreach(Unit u in units)
-                {
-                    msg += u.Code + " ";
-                }
-                DependencyService.Get<IMessage>().shorttime(msg);
-            }
-
-            #endregion
-
+            List<Unit> units = SaveAndLoad.loadUnits(this.GetType().GetTypeInfo().Assembly);
             
             InitializeComponent();
 

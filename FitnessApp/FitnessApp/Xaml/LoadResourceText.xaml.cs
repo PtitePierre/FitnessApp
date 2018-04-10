@@ -19,12 +19,12 @@ namespace FitnessApp
 		public LoadResourceText ()
         {
 
-            #region How to load a text file embedded resource
+            #region loading a text file embedded resource
 
             string name = "PCLTextResource.txt";
             var assembly = this.GetType().GetTypeInfo().Assembly;
 
-            string text = DAO.LoadText(name, assembly);
+            string text = SaveAndLoad.LoadText(name, assembly);
 
             #endregion
 
