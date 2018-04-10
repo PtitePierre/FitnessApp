@@ -6,17 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using System.Reflection;
 
 namespace FitnessApp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+	//[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddSession : ContentPage
 	{
 		public AddSession ()
-		{
-			InitializeComponent ();
-		}
+        {
+            List<Unit> units = SaveAndLoad.loadUnits(this.GetType().GetTypeInfo().Assembly);
+            List<SportType> sports = SaveAndLoad.loadSportTypes(this.GetType().GetTypeInfo().Assembly);
+
+            InitializeComponent ();
+
+            pic_unit.ItemsSource = units;
+            pic_sportType.ItemsSource = sports;
+        }
 
         private void Button_Clicked(object sender, EventArgs e)
         {

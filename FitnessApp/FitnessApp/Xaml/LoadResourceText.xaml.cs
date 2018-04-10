@@ -14,9 +14,7 @@ namespace FitnessApp
 	//[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoadResourceText : ContentPage
 	{
-        private Contexte contexte;
-
-		public LoadResourceText ()
+		public LoadResourceText()
         {
 
             #region loading a text file embedded resource

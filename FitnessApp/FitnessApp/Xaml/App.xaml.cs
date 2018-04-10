@@ -10,8 +10,6 @@ namespace FitnessApp
 {
 	public partial class App : Application
 	{
-        private Unit[] units;
-
 		public App ()
 		{
 			InitializeComponent();

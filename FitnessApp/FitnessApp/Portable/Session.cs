@@ -6,11 +6,11 @@ namespace FitnessApp.Portable
 {
     public class Session
     {
-        private int Id { get; set; }
-        private int Quantity { get; set; }
-        private Unit Unit { get; set; }
-        private DateTime Dt { get; set; }
-        private SportType Type { get; set; }
+        public int Id { get; set; }
+        public int Quantity { get; set; }
+        public Unit Unit { get; set; }
+        public DateTime Dt { get; set; }
+        public SportType Type { get; set; }
 
     }
 }

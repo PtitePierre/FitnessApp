@@ -6,13 +6,13 @@ namespace FitnessApp.Portable
 {
     public class User
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
-        private string Username { get; set; }
-        private DateTime CreationDate { get; set; }
-        private DateTime DoB { get; set; }
-        private float Weight { get; set; }
-        private string Password { get; set; }
-        private int Level { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Username { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime DoB { get; set; }
+        public float Weight { get; set; }
+        public string Password { get; set; }
+        public int Level { get; set; }
     }
 }

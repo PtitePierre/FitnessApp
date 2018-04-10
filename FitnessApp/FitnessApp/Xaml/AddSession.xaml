@@ -8,7 +8,7 @@
             <StackLayout Orientation="Horizontal" >
                 <Label x:Name="lab_SportSess" Text="Sport type :"/>
                 <!-- <Entry x:Name="ent_sportType" /> -->
-                <Picker x:Name="pic_sportType" />
+                <Picker x:Name="pic_sportType" HorizontalOptions="FillAndExpand" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
@@ -19,12 +19,12 @@
 
             <StackLayout Orientation="Horizontal" >
                 <Label x:Name="lab_quantity" Text="Quantity :" />
-                <Entry x:Name="ent_quantity" Keyboard="Numeric" />
+                <Entry x:Name="ent_quantity" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
                 <Label x:Name="lab_unit" Text="Unit :" />
-                <Picker x:Name="pic_unit" />
+                <Picker x:Name="pic_unit" HorizontalOptions="FillAndExpand" />
             </StackLayout>
 
             <Button x:Name="btn_submit" 
