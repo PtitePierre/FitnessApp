@@ -15,8 +15,8 @@ namespace FitnessApp
 	{
 		public AddSession ()
         {
-            List<Unit> units = SaveAndLoad.loadUnits(this.GetType().GetTypeInfo().Assembly);
-            List<SportType> sports = SaveAndLoad.loadSportTypes(this.GetType().GetTypeInfo().Assembly);
+            List<Unit> units = SaveAndLoad.LoadUnits(this.GetType().GetTypeInfo().Assembly);
+            List<SportType> sports = SaveAndLoad.LoadSportTypes(this.GetType().GetTypeInfo().Assembly);
 
             InitializeComponent ();
 

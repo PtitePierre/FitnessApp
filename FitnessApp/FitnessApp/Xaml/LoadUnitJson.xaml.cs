@@ -18,7 +18,7 @@ namespace FitnessApp
 	{
 		public LoadUnitJson ()
 		{
-            List<Unit> units = SaveAndLoad.loadUnits(this.GetType().GetTypeInfo().Assembly);
+            List<Unit> units = SaveAndLoad.LoadUnits(this.GetType().GetTypeInfo().Assembly);
             
             InitializeComponent();
 

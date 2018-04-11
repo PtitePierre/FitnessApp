@@ -33,7 +33,7 @@ namespace FitnessApp.Portable
             // save all the sessions in session.json
         }
 
-        public static List<Unit> loadUnits(System.Reflection.Assembly assembly)
+        public static List<Unit> LoadUnits(System.Reflection.Assembly assembly)
         {
             if (Units == null || Units.Count() == 0)
             {
@@ -41,42 +41,15 @@ namespace FitnessApp.Portable
                 // open unit.json file
                 // deserialize json object got from unit.json
 
-                #region How to load an Json file embedded resource
-
                 string name = "unit.json";
-                //var assembly = this.GetType().GetTypeInfo().Assembly;
-                var resources = assembly.GetManifestResourceNames();
-                var resourceName = resources.Single(r => r.EndsWith(name, StringComparison.OrdinalIgnoreCase));
-                var stream = assembly.GetManifestResourceStream(resourceName);
 
-                try
-                {
-                    using (var reader = new System.IO.StreamReader(stream))
-                    {
-
-                        var json = reader.ReadToEnd();
-                        var rootobject = JsonConvert.DeserializeObject<List<Unit>>(json);
-
-                        Units = rootobject;
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    DependencyService.Get<IMessage>().longtime(e.Message);
-                }
-                finally
-                {
-                    DependencyService.Get<IMessage>().shorttime("End of loading");
-                }
-
-                #endregion
+                Units = LoadList<Unit>(name, assembly);
             }
 
             return Units;
         }
 
-        public static List<SportType> loadSportTypes(System.Reflection.Assembly assembly)
+        public static List<SportType> LoadSportTypes(System.Reflection.Assembly assembly)
         {
             if (Sports == null || Sports.Count() == 0)
             {
@@ -84,48 +57,30 @@ namespace FitnessApp.Portable
                 // open unit.json file
                 // deserialize json object got from unit.json
 
-                #region How to load an Json file embedded resource
-
                 string name = "sport.json";
-                //var assembly = this.GetType().GetTypeInfo().Assembly;
-                var resources = assembly.GetManifestResourceNames();
-                var resourceName = resources.Single(r => r.EndsWith(name, StringComparison.OrdinalIgnoreCase));
-                var stream = assembly.GetManifestResourceStream(resourceName);
 
-                try
-                {
-                    using (var reader = new System.IO.StreamReader(stream))
-                    {
-
-                        var json = reader.ReadToEnd();
-                        var rootobject = JsonConvert.DeserializeObject<List<SportType>>(json);
-
-                        Sports = rootobject;
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    DependencyService.Get<IMessage>().longtime(e.Message);
-                }
-                finally
-                {
-                    DependencyService.Get<IMessage>().shorttime("End of loading");
-                }
-
-                #endregion
+                Sports = LoadList<SportType>(name, assembly);
             }
 
             return Sports;
         }
 
-        public static List<Session> loadSessions()
+        public static List<Session> LoadSessions(System.Reflection.Assembly assembly)
         {
-            List<Session> sessions = new List<Session>();
+            if (Sessions == null || Sessions.Count() == 0)
+            {
+                // TO DO : Fill units
+                // open unit.json file
+                // deserialize json object got from unit.json
+
+                string name = "session.json";
+
+                Sessions = LoadList<Session>(name, assembly);
+            }
 
             // TO DO : Fill sessions
 
-            return sessions;
+            return Sessions;
         }
 
         public static string LoadText(string filename, System.Reflection.Assembly assembly)
@@ -158,6 +113,44 @@ namespace FitnessApp.Portable
             #endregion
 
             return text;
+        }
+
+        public static List<T> LoadList<T>(string filename, System.Reflection.Assembly assembly)
+        {
+            List<T> list = new List<T>();
+
+            #region How to load an Json file embedded resource
+
+            //string name = "sport.json";
+            //var assembly = this.GetType().GetTypeInfo().Assembly;
+            var resources = assembly.GetManifestResourceNames();
+            var resourceName = resources.Single(r => r.EndsWith(filename, StringComparison.OrdinalIgnoreCase));
+            var stream = assembly.GetManifestResourceStream(resourceName);
+
+            try
+            {
+                using (var reader = new System.IO.StreamReader(stream))
+                {
+
+                    var json = reader.ReadToEnd();
+                    var rootobject = JsonConvert.DeserializeObject<List<T>>(json);
+
+                    list = rootobject;
+                }
+
+            }
+            catch (Exception e)
+            {
+                DependencyService.Get<IMessage>().longtime(e.Message);
+            }
+            finally
+            {
+                DependencyService.Get<IMessage>().shorttime("End of loading");
+            }
+
+            #endregion
+
+            return list;
         }
 
     }
