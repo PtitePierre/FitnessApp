@@ -12,7 +12,7 @@
                 <x:Array Type="{x:Type local:MasterPageItem}">
                     <local:MasterPageItem Title="Add session" IconSource="" TargetType="{x:Type local:AddSession}" />
                     <local:MasterPageItem Title="View session" IconSource="" TargetType="{x:Type local:ViewSessionList}" />
-                    <local:MasterPageItem Title="View units" IconSource="" TargetType="{x:Type local:LoadUnitJson}" />
+                    <local:MasterPageItem Title="View units" IconSource="" TargetType="{x:Type local:ViewListJson}" />
                     <local:MasterPageItem Title="GPS Tracker" IconSource="" TargetType="{x:Type local:GpsTracker}" />
                     <local:MasterPageItem Title="Binding test" IconSource="" TargetType="{x:Type local:LoadResourceText}" />
                     

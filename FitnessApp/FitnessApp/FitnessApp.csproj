@@ -26,6 +26,9 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Xaml\App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Xaml\ViewListJson.xaml.cs">
+      <DependentUpon>ViewListJson.xaml</DependentUpon>
+    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Xaml\MainPage.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
@@ -38,7 +41,7 @@
     <EmbeddedResource Update="Xaml\LoadResourceText.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\LoadUnitJson.xaml">
+    <EmbeddedResource Update="Xaml\ViewListJson.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Xaml\GpsTracker.xaml">

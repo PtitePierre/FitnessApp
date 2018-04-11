@@ -14,16 +14,19 @@ using FitnessApp.Portable;
 namespace FitnessApp
 {
 	//[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoadUnitJson : ContentPage
+	public partial class ViewListJson : ContentPage
 	{
-		public LoadUnitJson ()
+		public ViewListJson ()
 		{
             List<Unit> units = SaveAndLoad.LoadUnits(this.GetType().GetTypeInfo().Assembly);
-            
+            List<SportType> sports = SaveAndLoad.LoadSportTypes(this.GetType().GetTypeInfo().Assembly);
+
+
             InitializeComponent();
 
             // TO DO : Binding Data units to ListView
             UnitList.ItemsSource = units;
+            SportList.ItemsSource = sports;
         }
     }
 }
