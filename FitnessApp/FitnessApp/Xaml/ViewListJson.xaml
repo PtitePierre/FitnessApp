@@ -7,11 +7,26 @@
             <Label Text="Known units :"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
+            
             <ListView x:Name="UnitList" />
+            
+            <Button x:Name="btn_addUnit"
+                    Text="Add a unit"
+                    BackgroundColor="#03AB17"
+                    TextColor="White"
+                    HorizontalOptions="Center" />
+            
             <Label Text="Known sports :"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
+            
             <ListView x:Name="SportList" />
+            
+            <Button x:Name="btn_addSport"
+                    Text="Add a sport"
+                    BackgroundColor="#03AB17"
+                    TextColor="White"
+                    HorizontalOptions="Center" />
             
         </StackLayout>
     </ContentPage.Content>
