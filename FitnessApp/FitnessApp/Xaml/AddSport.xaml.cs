@@ -5,34 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using FitnessApp.Portable;
 
 namespace FitnessApp
 {
 	//[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AddUnit : ContentPage
-	{
+	public partial class AddSport : ContentPage
+    {
         private Page Page;
-		public AddUnit (Page page, Unit unit = null)
-		{
+        public AddSport (Page page, SportType sport = null)
+        {
             Page = page;
-			InitializeComponent ();
-            
-            if (unit != null)
+            InitializeComponent();
+
+            if (sport != null)
             {
-                in_Code.Text = unit.Code;
-                in_Name.Text = unit.Name;
+                in_Name.Text = sport.Name;
             }
             else
             {
-                DependencyService.Get<IMessage>().shorttime("no unit parameter");
+                DependencyService.Get<IMessage>().shorttime("no sport parameter");
             }
-		}
+        }
 
         private void Button_CancelClicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = Page;            
+            Application.Current.MainPage = Page;
         }
-	}
+    }
 }

@@ -32,18 +32,29 @@ namespace FitnessApp
 
         private void AddSportClicked(object sender, EventArgs e)
         {
-            //DisplayAlert("Ploup", "Ploup'z alert", "Quit!");
+            if (SportList.SelectedItem != null)
+            {
+                SportType sport = (SportType)SportList.SelectedItem;
+                SportList.SelectedItem = null;
+                Application.Current.MainPage = new NavigationPage(new AddSport(Application.Current.MainPage, sport));
+            }
+            else
+            {
+                Application.Current.MainPage = new NavigationPage(new AddSport(Application.Current.MainPage));
+            }
         }
 
         private void AddUnitClicked(object sender, EventArgs e)
         {
             if(UnitList.SelectedItem != null)
             {
-                Application.Current.MainPage = new NavigationPage(new AddUnit(this, (Unit)UnitList.SelectedItem));
+                Unit unit = (Unit)UnitList.SelectedItem;
+                UnitList.SelectedItem = null;
+                Application.Current.MainPage = new NavigationPage(new AddUnit(Application.Current.MainPage, unit));
             }
             else
             {
-                Application.Current.MainPage = new NavigationPage(new AddUnit(this));
+                Application.Current.MainPage = new NavigationPage(new AddUnit(Application.Current.MainPage));
             }
         }
     }
