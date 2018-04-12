@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.AddUnit">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Edit the unit :"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Name :"/>
+            <Entry x:Name="in_Name" Placeholder="Ex: kilometer" />
+            <Label Text="Code :"/>
+            <Entry x:Name="in_Code" Placeholder="Ex: km" />
+            
+            <StackLayout Orientation="Horizontal"
+                        HorizontalOptions="Center" >
+                <Button x:Name="btn_Cancel" Text="Cancel" Clicked="Button_CancelClicked"/>
+                <Button x:Name="btn_Submit" Text="Submit" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
