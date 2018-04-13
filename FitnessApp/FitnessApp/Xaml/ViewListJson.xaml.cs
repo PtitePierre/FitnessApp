@@ -26,16 +26,16 @@ namespace FitnessApp
             
 
             // TO DO : Binding Data units to ListView
-            UnitList.ItemsSource = units;
-            SportList.ItemsSource = sports;
+            lis_units.ItemsSource = units;
+            lis_sports.ItemsSource = sports;
         }
 
         private void AddSportClicked(object sender, EventArgs e)
         {
-            if (SportList.SelectedItem != null)
+            if (lis_sports.SelectedItem != null)
             {
-                SportType sport = (SportType)SportList.SelectedItem;
-                SportList.SelectedItem = null;
+                SportType sport = (SportType)lis_sports.SelectedItem;
+                lis_sports.SelectedItem = null;
                 Application.Current.MainPage = new NavigationPage(new AddSport(Application.Current.MainPage, sport));
             }
             else
@@ -46,10 +46,10 @@ namespace FitnessApp
 
         private void AddUnitClicked(object sender, EventArgs e)
         {
-            if(UnitList.SelectedItem != null)
+            if(lis_units.SelectedItem != null)
             {
-                Unit unit = (Unit)UnitList.SelectedItem;
-                UnitList.SelectedItem = null;
+                Unit unit = (Unit)lis_units.SelectedItem;
+                lis_units.SelectedItem = null;
                 Application.Current.MainPage = new NavigationPage(new AddUnit(Application.Current.MainPage, unit));
             }
             else

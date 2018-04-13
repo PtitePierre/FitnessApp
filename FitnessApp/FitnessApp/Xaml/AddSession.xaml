@@ -19,7 +19,7 @@
 
             <StackLayout Orientation="Horizontal" >
                 <Label x:Name="lab_quantity" Text="Quantity :" />
-                <Entry x:Name="ent_quantity" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+                <Entry x:Name="in_quantity" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >

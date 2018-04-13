@@ -5,16 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using FitnessApp.Portable;
+using System.Reflection;
 
 namespace FitnessApp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+	//[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ViewSessionList : ContentPage
 	{
 		public ViewSessionList ()
-		{
-			InitializeComponent ();
-		}
+        {
+            List<Session> sessions = SaveAndLoad.LoadSessions(this.GetType().GetTypeInfo().Assembly);
+
+            InitializeComponent ();
+
+            lis_sessions.ItemsSource = sessions;
+        }
 	}
 }

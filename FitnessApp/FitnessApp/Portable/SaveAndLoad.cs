@@ -15,22 +15,51 @@ namespace FitnessApp.Portable
         public static List<Unit> Units { get; set; }
         public static List<SportType> Sports { get; set; }
 
-        public static void saveNewUnit()
+        public static void SaveNewUnit(System.Reflection.Assembly assembly)
         {
             // TO DO
             // save a new unit in unit.json
         }
 
-        public static void saveNewSportType()
+        public static void SaveNewSportType()
         {
             // TO DO
             // save a new sport type in sport.json
         }
 
-        public static void saveSessions()
+        public static void SaveSessions(System.Reflection.Assembly assembly, Session newSession)
         {
+            if (Sessions == null)
+                Sessions = LoadSessions(assembly);
+
+            Sessions.Add(newSession);
             // TO DO
             // save all the sessions in session.json
+
+            string json = JsonConvert.SerializeObject(Sessions);
+
+            string filename = "session.json";
+
+            //var assembly = this.GetType().GetTypeInfo().Assembly;
+            var resources = assembly.GetManifestResourceNames();
+            var resourceName = resources.Single(r => r.EndsWith(filename, StringComparison.OrdinalIgnoreCase));
+            var stream = assembly.GetManifestResourceStream(resourceName);
+
+            try
+            {
+                using (var writer = new System.IO.StreamWriter(stream))
+                {
+                    writer.Write(json);
+                }
+            }
+            catch(Exception e)
+            {
+                DependencyService.Get<IMessage>().shorttime(e.Message);
+            }
+            finally
+            {
+                DependencyService.Get<IMessage>().shorttime("End of saving");
+            }
         }
 
         public static List<Unit> LoadUnits(System.Reflection.Assembly assembly)
@@ -121,14 +150,13 @@ namespace FitnessApp.Portable
 
             #region How to load an Json file embedded resource
 
-            //string name = "sport.json";
-            //var assembly = this.GetType().GetTypeInfo().Assembly;
-            var resources = assembly.GetManifestResourceNames();
-            var resourceName = resources.Single(r => r.EndsWith(filename, StringComparison.OrdinalIgnoreCase));
-            var stream = assembly.GetManifestResourceStream(resourceName);
-
             try
             {
+                //var assembly = this.GetType().GetTypeInfo().Assembly;
+                var resources = assembly.GetManifestResourceNames();
+                var resourceName = resources.Single(r => r.EndsWith(filename, StringComparison.OrdinalIgnoreCase));
+                var stream = assembly.GetManifestResourceStream(resourceName);
+
                 using (var reader = new System.IO.StreamReader(stream))
                 {
 

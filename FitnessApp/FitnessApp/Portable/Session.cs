@@ -8,9 +8,14 @@ namespace FitnessApp.Portable
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public Unit Unit { get; set; }
-        public DateTime Dt { get; set; }
-        public SportType Type { get; set; }
+        public Unit SUnit { get; set; }
+        public DateTime SDate { get; set; }
+        public SportType SType { get; set; }
 
+        override
+        public string ToString()
+        {
+            return SType+ " : " + Quantity + " " + SUnit.Code + "  " + SDate;
+        }
     }
 }

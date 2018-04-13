@@ -8,7 +8,7 @@
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <ListView x:Name="UnitList" />
+            <ListView x:Name="lis_units" />
 
             <Button x:Name="btn_addUnit"
                     Text="Edit unit"
@@ -21,7 +21,7 @@
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
             
-            <ListView x:Name="SportList" />
+            <ListView x:Name="lis_sports" />
             
             <Button x:Name="btn_addSport"
                     Text="Edit sport"

@@ -26,8 +26,16 @@ namespace FitnessApp
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            var message = "Test toast notification!";
-            DependencyService.Get<IMessage>().longtime(message);
+            Session newSession = new Session();
+
+            newSession.Quantity = Int32.Parse(in_quantity.Text);
+            newSession.SType = (SportType)pic_sportType.SelectedItem;
+            newSession.SUnit = (Unit)pic_unit.SelectedItem;
+            newSession.SDate = pic_date.Date + pic_time.Time;
+
+            DependencyService.Get<IMessage>().longtime(newSession.ToString());
+
+            SaveAndLoad.SaveSessions(this.GetType().GetTypeInfo().Assembly, newSession);
         }
-	}
+    }
 }
