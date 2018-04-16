@@ -15,10 +15,14 @@ namespace FitnessApp
 	{
 		public AddSession ()
         {
-            List<Unit> units = SaveAndLoad.LoadUnits(this.GetType().GetTypeInfo().Assembly);
-            List<SportType> sports = SaveAndLoad.LoadSportTypes(this.GetType().GetTypeInfo().Assembly);
-
             InitializeComponent ();
+            FillPickers();
+        }
+
+        private async void FillPickers()
+        {
+            List<Unit> units = await SaveAndLoad.LoadUnits();
+            List<SportType> sports = await SaveAndLoad.LoadSports();
 
             pic_unit.ItemsSource = units;
             pic_sportType.ItemsSource = sports;
@@ -28,14 +32,25 @@ namespace FitnessApp
         {
             Session newSession = new Session();
 
-            newSession.Quantity = Int32.Parse(in_quantity.Text);
-            newSession.SType = (SportType)pic_sportType.SelectedItem;
-            newSession.SUnit = (Unit)pic_unit.SelectedItem;
-            newSession.SDate = pic_date.Date + pic_time.Time;
+            if(in_quantity.Text != null && pic_sportType.SelectedItem != null && pic_unit.SelectedItem != null)
+            {
+                newSession.Quantity = Int32.Parse(in_quantity.Text);
+                newSession.SType = (SportType)pic_sportType.SelectedItem;
+                newSession.SUnit = (Unit)pic_unit.SelectedItem;
+                newSession.SDate = pic_date.Date + pic_time.Time;
 
-            DependencyService.Get<IMessage>().longtime(newSession.ToString());
+                SaveAndLoad.SaveSession(newSession);
 
-            SaveAndLoad.SaveSessions(this.GetType().GetTypeInfo().Assembly, newSession);
+                pic_unit.SelectedItem = null;
+                pic_sportType.SelectedItem = null;
+                in_quantity.Text = null;
+
+                DependencyService.Get<IMessage>().longtime("New session added");
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().longtime("Incomplete information");
+            }            
         }
     }
 }

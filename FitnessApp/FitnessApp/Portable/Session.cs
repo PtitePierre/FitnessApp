@@ -11,7 +11,7 @@ namespace FitnessApp.Portable
         public Unit SUnit { get; set; }
         public DateTime SDate { get; set; }
         public SportType SType { get; set; }
-
+        
         override
         public string ToString()
         {

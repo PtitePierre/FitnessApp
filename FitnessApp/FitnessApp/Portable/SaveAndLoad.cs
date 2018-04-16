@@ -6,180 +6,93 @@ using Xamarin.Forms;
 using System.Reflection;
 using System.IO;
 using System.Linq;
+using PCLStorage;
+using System.Threading.Tasks;
 
 namespace FitnessApp.Portable
 {
-    public static class SaveAndLoad
+    public class SaveAndLoad
     {
-        public static List<Session> Sessions { get; set; }
-        public static List<Unit> Units { get; set; }
-        public static List<SportType> Sports { get; set; }
+        static List<Unit> Units;
+        static List<SportType> SportTypes;
+        static List<Session> Sessions;
 
-        public static void SaveNewUnit(System.Reflection.Assembly assembly)
+        static string unitFile = "unit.json";
+        static string sportFile = "sport.json";
+        static string sessionFile = "session.json";
+
+        #region Loading part
+        public async static Task<List<Unit>> LoadUnits()
         {
-            // TO DO
-            // save a new unit in unit.json
-        }
-
-        public static void SaveNewSportType()
-        {
-            // TO DO
-            // save a new sport type in sport.json
-        }
-
-        public static void SaveSessions(System.Reflection.Assembly assembly, Session newSession)
-        {
-            if (Sessions == null)
-                Sessions = LoadSessions(assembly);
-
-            Sessions.Add(newSession);
-            // TO DO
-            // save all the sessions in session.json
-
-            string json = JsonConvert.SerializeObject(Sessions);
-
-            string filename = "session.json";
-
-            //var assembly = this.GetType().GetTypeInfo().Assembly;
-            var resources = assembly.GetManifestResourceNames();
-            var resourceName = resources.Single(r => r.EndsWith(filename, StringComparison.OrdinalIgnoreCase));
-            var stream = assembly.GetManifestResourceStream(resourceName);
-
-            try
-            {
-                using (var writer = new System.IO.StreamWriter(stream))
-                {
-                    writer.Write(json);
-                }
-            }
-            catch(Exception e)
-            {
-                DependencyService.Get<IMessage>().shorttime(e.Message);
-            }
-            finally
-            {
-                DependencyService.Get<IMessage>().shorttime("End of saving");
-            }
-        }
-
-        public static List<Unit> LoadUnits(System.Reflection.Assembly assembly)
-        {
-            if (Units == null || Units.Count() == 0)
-            {
-                // TO DO : Fill units
-                // open unit.json file
-                // deserialize json object got from unit.json
-
-                string name = "unit.json";
-
-                Units = LoadList<Unit>(name, assembly);
-            }
-
+            Units = Units ?? await LoadList("unit.json", Units);
             return Units;
         }
 
-        public static List<SportType> LoadSportTypes(System.Reflection.Assembly assembly)
+        public async static Task<List<SportType>> LoadSports()
         {
-            if (Sports == null || Sports.Count() == 0)
-            {
-                // TO DO : Fill units
-                // open unit.json file
-                // deserialize json object got from unit.json
-
-                string name = "sport.json";
-
-                Sports = LoadList<SportType>(name, assembly);
-            }
-
-            return Sports;
+            SportTypes = SportTypes ?? await LoadList("sport.json", SportTypes);
+            return SportTypes;
         }
 
-        public static List<Session> LoadSessions(System.Reflection.Assembly assembly)
+        public async static Task<List<Session>> LoadSessions()
         {
-            if (Sessions == null || Sessions.Count() == 0)
-            {
-                // TO DO : Fill units
-                // open unit.json file
-                // deserialize json object got from unit.json
-
-                string name = "session.json";
-
-                Sessions = LoadList<Session>(name, assembly);
-            }
-
-            // TO DO : Fill sessions
-
+            Sessions = Sessions ?? await LoadList("session.json", Sessions);
             return Sessions;
         }
 
-        public static string LoadText(string filename, System.Reflection.Assembly assembly)
+        public async static Task<List<T>> LoadList<T>(string filename, List<T> list)
         {
-            
-            #region How to load a text file embedded resource
-            
-            //var assembly = this.GetType().GetTypeInfo().Assembly;
-            var resources = assembly.GetManifestResourceNames();
-            var resourceName = resources.Single(r => r.EndsWith(filename, StringComparison.OrdinalIgnoreCase));
-            var stream = assembly.GetManifestResourceStream(resourceName);
+            // open filename
+            // read content
+            // deserialize content as a list of T in list
+            IFileSystem fileSystem = FileSystem.Current;
+            IFolder folder = fileSystem.LocalStorage;
+            IFile file = await folder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
 
-            string text = "";
-            try
-            {
-                using (var reader = new System.IO.StreamReader(stream))
-                {
-                    text = reader.ReadToEnd();
-                }
-            }
-            catch (Exception e)
-            {
-                DependencyService.Get<IMessage>().shorttime(e.Message);
-                text = "Echec de chargement.";
-            }
-            finally
-            {
-                DependencyService.Get<IMessage>().shorttime("End of loading");
-            }
-            #endregion
-
-            return text;
-        }
-
-        public static List<T> LoadList<T>(string filename, System.Reflection.Assembly assembly)
-        {
-            List<T> list = new List<T>();
-
-            #region How to load an Json file embedded resource
-
-            try
-            {
-                //var assembly = this.GetType().GetTypeInfo().Assembly;
-                var resources = assembly.GetManifestResourceNames();
-                var resourceName = resources.Single(r => r.EndsWith(filename, StringComparison.OrdinalIgnoreCase));
-                var stream = assembly.GetManifestResourceStream(resourceName);
-
-                using (var reader = new System.IO.StreamReader(stream))
-                {
-
-                    var json = reader.ReadToEnd();
-                    var rootobject = JsonConvert.DeserializeObject<List<T>>(json);
-
-                    list = rootobject;
-                }
-
-            }
-            catch (Exception e)
-            {
-                DependencyService.Get<IMessage>().longtime(e.Message);
-            }
-            finally
-            {
-                DependencyService.Get<IMessage>().shorttime("End of loading");
-            }
-
-            #endregion
+            list = JsonConvert.DeserializeObject<List<T>>(await file.ReadAllTextAsync());
 
             return list;
         }
+        #endregion
 
+        #region Saving part
+        public static void SaveUnit(Unit unit)
+        {
+            if (Units == null)
+                Units = new List<Unit>();
+
+            Units.Add(unit);
+            SaveList(Units, unitFile);
+        }
+
+        public static void SaveSport(SportType sport)
+        {
+            if (SportTypes == null)
+                SportTypes = new List<SportType>();
+
+            SportTypes.Add(sport);
+            SaveList(SportTypes, sportFile);
+        }
+
+        public static void SaveSession(Session session)
+        {
+            if (Sessions == null)
+                Sessions = new List<Session>();
+
+            Sessions.Add(session);
+            SaveList(Sessions, sessionFile);
+        }
+
+        public async static Task<bool> SaveList<T>(List<T> list, string filename)
+        {
+            IFileSystem fileSystem = FileSystem.Current;
+            IFolder folder = fileSystem.LocalStorage;
+            IFile file = await folder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
+
+            await file.WriteAllTextAsync(JsonConvert.SerializeObject(list));
+
+            return true;
+        }
+        #endregion
     }
 }

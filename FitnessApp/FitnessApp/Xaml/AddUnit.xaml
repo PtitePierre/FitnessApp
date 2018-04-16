@@ -15,7 +15,7 @@
             <StackLayout Orientation="Horizontal"
                         HorizontalOptions="Center" >
                 <Button x:Name="btn_Cancel" Text="Cancel" Clicked="Button_CancelClicked"/>
-                <Button x:Name="btn_Submit" Text="Submit" />
+                <Button x:Name="btn_Submit" Text="Submit" Clicked="Button_SubmitClicked"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

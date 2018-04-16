@@ -18,16 +18,19 @@ namespace FitnessApp
 	{
 		public ViewListJson ()
 		{
-            List<Unit> units = SaveAndLoad.LoadUnits(this.GetType().GetTypeInfo().Assembly);
-            List<SportType> sports = SaveAndLoad.LoadSportTypes(this.GetType().GetTypeInfo().Assembly);
-
-
             InitializeComponent();
-            
+            FillListViews();
+        }
 
+        private async void FillListViews()
+        {
+            List<Unit> units = await SaveAndLoad.LoadUnits();
+            List<SportType> sports = await SaveAndLoad.LoadSports();
+            
             // TO DO : Binding Data units to ListView
             lis_units.ItemsSource = units;
             lis_sports.ItemsSource = sports;
+
         }
 
         private void AddSportClicked(object sender, EventArgs e)

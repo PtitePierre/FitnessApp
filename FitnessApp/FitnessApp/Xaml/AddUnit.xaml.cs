@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using FitnessApp.Portable;
+using System.Reflection;
 
 namespace FitnessApp
 {
@@ -33,6 +33,22 @@ namespace FitnessApp
         private void Button_CancelClicked(object sender, EventArgs e)
         {
             Application.Current.MainPage = Page;            
+        }
+
+        private void Button_SubmitClicked(object sender, EventArgs e)
+        {
+            if(in_Code.Text != null && in_Name.Text != null)
+            {
+                Unit newUnit = new Unit();
+                newUnit.Code = in_Code.Text;
+                newUnit.Name = in_Name.Text;
+
+                SaveAndLoad.SaveUnit(newUnit);
+
+                in_Name.Text = null;
+                in_Code.Text = null;
+                DependencyService.Get<IMessage>().shorttime("New unit saved");
+            }
         }
 	}
 }

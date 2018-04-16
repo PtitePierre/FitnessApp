@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using System.Reflection;
 
 namespace FitnessApp
 {
@@ -22,6 +23,7 @@ namespace FitnessApp
             // Handle when your app starts
 
             // TO DO : load data
+            
 		}
 
 		protected override void OnSleep ()

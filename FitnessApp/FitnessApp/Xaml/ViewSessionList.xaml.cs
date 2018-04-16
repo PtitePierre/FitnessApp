@@ -15,9 +15,13 @@ namespace FitnessApp
 	{
 		public ViewSessionList ()
         {
-            List<Session> sessions = SaveAndLoad.LoadSessions(this.GetType().GetTypeInfo().Assembly);
-
             InitializeComponent ();
+            FillListView();
+        }
+
+        private async void FillListView()
+        {
+            List<Session> sessions = await SaveAndLoad.LoadSessions();
 
             lis_sessions.ItemsSource = sessions;
         }
