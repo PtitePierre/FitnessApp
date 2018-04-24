@@ -24,7 +24,15 @@ namespace FitnessApp.Portable
         #region Loading part
         public async static Task<List<Unit>> LoadUnits()
         {
-            Units = Units ?? await LoadList("unit.json", Units);
+            try
+            {
+                Units = Units ?? await WSConsumer.GetUnits();
+            }
+            catch(Exception e)
+            {
+                Units = Units ?? await LoadList("unit.json", Units);
+                DependencyService.Get<IMessage>().longtime("ERR: " + e.Message);
+            }
             return Units;
         }
 
