@@ -31,14 +31,20 @@ namespace FitnessApp.Portable
             catch(Exception e)
             {
                 Units = Units ?? await LoadList("unit.json", Units);
-                DependencyService.Get<IMessage>().longtime("ERR: " + e.Message);
             }
             return Units;
         }
 
         public async static Task<List<SportType>> LoadSports()
         {
-            SportTypes = SportTypes ?? await LoadList("sport.json", SportTypes);
+            try
+            {
+                SportTypes = SportTypes ?? await WSConsumer.GetSports();
+            }
+            catch (Exception e)
+            {
+                SportTypes = SportTypes ?? await LoadList("sport.json", SportTypes);
+            }
             return SportTypes;
         }
 
