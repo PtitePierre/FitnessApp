@@ -70,22 +70,42 @@ namespace FitnessApp.Portable
         #endregion
 
         #region Saving part
-        public static void SaveUnit(Unit unit)
+        public async static void SaveUnit(Unit unit)
         {
-            if (Units == null)
-                Units = new List<Unit>();
+            try
+            {
+                if (Units == null)
+                    await LoadUnits();
 
-            Units.Add(unit);
-            SaveList(Units, unitFile);
+                Units = await WSConsumer.AddUnit(unit);
+            }
+            catch(Exception e)
+            {
+                if (Units == null)
+                    Units = new List<Unit>();
+
+                Units.Add(unit);
+                SaveList(Units, unitFile);
+            }
         }
 
-        public static void SaveSport(SportType sport)
+        public static async void SaveSport(SportType sport)
         {
-            if (SportTypes == null)
-                SportTypes = new List<SportType>();
+            try
+            {
+                if (Units == null)
+                    await LoadSports();
 
-            SportTypes.Add(sport);
-            SaveList(SportTypes, sportFile);
+                SportTypes = await WSConsumer.AddSport(sport);
+            }
+            catch (Exception e)
+            {
+                if (SportTypes == null)
+                    SportTypes = new List<SportType>();
+
+                SportTypes.Add(sport);
+                SaveList(SportTypes, sportFile);
+            }
         }
 
         public static void SaveSession(Session session)
