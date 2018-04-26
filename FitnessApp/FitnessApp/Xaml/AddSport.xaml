@@ -9,6 +9,10 @@
                 HorizontalOptions="CenterAndExpand" />
             <Label Text="Name :"/>
             <Entry x:Name="in_Name" Placeholder="Ex: crunch" />
+            <StackLayout x:Name="lis_units"
+                         Orientation="Vertical"
+                         VerticalOptions="StartAndExpand"
+                         HorizontalOptions="CenterAndExpand"/>
 
             <StackLayout Orientation="Horizontal"
                         HorizontalOptions="Center" >

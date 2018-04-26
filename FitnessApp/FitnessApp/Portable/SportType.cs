@@ -8,7 +8,7 @@ namespace FitnessApp.Portable
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<int> UnitIds { get; set; }
+        public List<int> Units { get; set; }
 
         override
         public string ToString()

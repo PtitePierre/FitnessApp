@@ -15,5 +15,10 @@ namespace FitnessApp.Portable
         {
             return Code + " : " + Name;
         }
+
+        public string ToStringBtn()
+        {
+            return Id + ". " + Code + " : " + Name;
+        }
     }
 }
