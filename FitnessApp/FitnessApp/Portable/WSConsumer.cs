@@ -30,7 +30,8 @@ namespace FitnessApp.Portable
             }
             catch(Exception e)
             {
-                DependencyService.Get<IMessage>().longtime("ERR: "+e.Message);
+                //DependencyService.Get<IMessage>().longtime("ERR: "+e.Message);
+                throw e;
             }
             return units;
         }
@@ -78,7 +79,8 @@ namespace FitnessApp.Portable
             }
             catch (Exception e)
             {
-                DependencyService.Get<IMessage>().longtime("ERR: " + e.Message);
+                //DependencyService.Get<IMessage>().longtime("ERR: " + e.Message);
+                throw e;
             }
             return sports;
         }

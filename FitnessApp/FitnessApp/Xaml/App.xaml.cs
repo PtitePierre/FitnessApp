@@ -21,8 +21,6 @@ namespace FitnessApp
 		protected override void OnStart ()
 		{
             // Handle when your app starts
-
-            // TO DO : load data
             
 		}
 
@@ -30,14 +28,16 @@ namespace FitnessApp
 		{
             // Handle when your app sleeps
 
-            // TO DO : save sessions
-		}
+            // TO DO : save all localy
+            SaveAndLoad.SaveLocaly();
+        }
 
-		protected override void OnResume ()
+        protected override void OnResume ()
 		{
-			// Handle when your app resumes
+            // Handle when your app resumes
 
-            // TO DO : save sessions
-		}
+            // TO DO : save all localy
+            SaveAndLoad.SaveLocaly();
+        }
 	}
 }

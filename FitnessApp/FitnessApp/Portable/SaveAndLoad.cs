@@ -61,7 +61,7 @@ namespace FitnessApp.Portable
         }
 
         /// <summary>
-        /// Load Sessions from 
+        /// 
         /// </summary>
         /// <returns>Sessions: list of Session</returns>
         public async static Task<List<Session>> LoadSessions()
@@ -94,9 +94,10 @@ namespace FitnessApp.Portable
 
         #region Saving part
         /// <summary>
-        /// 
+        /// Add a new unit to the webservice and reload ws sports list
+        /// Or Add it to the local units list and save it localy
         /// </summary>
-        /// <param name="unit"></param>
+        /// <param name="unit">new unit to add in Units</param>
         public async static void SaveUnit(Unit unit)
         {
             try
@@ -118,9 +119,10 @@ namespace FitnessApp.Portable
         }
 
         /// <summary>
-        /// 
+        /// Add a new sportType to the webservice and reload ws units list
+        /// Or Add it to the local sportType list and save it localy
         /// </summary>
-        /// <param name="sport"></param>
+        /// <param name="sport">new sportType to add in SportTypes</param>
         public static async void SaveSport(SportType sport)
         {
             try
@@ -153,6 +155,16 @@ namespace FitnessApp.Portable
 
             Sessions.Add(session);
             SaveList(Sessions, sessionFile);
+        }
+
+        /// <summary>
+        /// Save all the data localy in their corresponding files
+        /// </summary>
+        public static async void SaveLocaly()
+        {
+            await SaveList(SportTypes, sportFile);
+            await SaveList(Units, unitFile);
+            await SaveList(Sessions, sessionFile);
         }
 
         /// <summary>

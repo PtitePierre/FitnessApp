@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+   
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.Welcome"
+             Title="Welcome" >
+    <ContentPage.Content>
+        <StackLayout x:Name="no_user"
+                     HorizontalOptions="CenterAndExpand">
+            <Label Text="Welcome to FitnessApp!"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" />
+            <StackLayout x:Name="old_user"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical">
+                <Label x:Name="user_name"
+                       VerticalOptions="Start"
+                       HorizontalOptions="CenterAndExpand"
+                       Text="Username"/>
+                <Button Text="Logout"
+                            Clicked="Button_Logout"
+                            HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout x:Name="new_user"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="User name:"
+                       VerticalOptions="Center"/>
+                    <Entry x:Name="in_username"
+                           Placeholder="Username"
+                           WidthRequest="192"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Email:"
+                       VerticalOptions="Center"/>
+                    <Entry x:Name="in_email"
+                           Placeholder="you@email.com"
+                           WidthRequest="192"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Password:"
+                       VerticalOptions="Center"/>
+                    <Entry x:Name="in_pwd"
+                           Placeholder="password"
+                           WidthRequest="192"
+                           IsPassword="True"
+                           HorizontalOptions="End"/>
+                </StackLayout>
+                <Button x:Name="Submit"
+                        Text="Submit"
+                        HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

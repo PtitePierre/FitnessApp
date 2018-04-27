@@ -6,25 +6,45 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal" >
-                <Label x:Name="lab_SportSess" Text="Sport type :"/>
+                <Label x:Name="lab_SportSess" 
+                       Text="Sport type :"
+                       VerticalOptions="Center"/>
                 <!-- <Entry x:Name="ent_sportType" /> -->
-                <Picker x:Name="pic_sportType" HorizontalOptions="FillAndExpand" />
+                <Picker x:Name="pic_sportType" 
+                        HorizontalOptions="EndAndExpand" 
+                        WidthRequest="192"
+                        />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
-                <Label x:Name="lab_dateTime" Text="Date :" />
-                <DatePicker x:Name="pic_date" />
-                <TimePicker x:Name="pic_time" />
+                <Label x:Name="lab_quantity" 
+                       Text="Quantity :" 
+                       VerticalOptions="Center"/>
+                <Entry x:Name="in_quantity" 
+                       Keyboard="Numeric" 
+                       HorizontalOptions="EndAndExpand"
+                       WidthRequest="192" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
-                <Label x:Name="lab_quantity" Text="Quantity :" />
-                <Entry x:Name="in_quantity" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+                <Label x:Name="lab_unit" 
+                       Text="Unit :" 
+                       VerticalOptions="Center"/>
+                <Picker x:Name="pic_unit" 
+                        HorizontalOptions="EndAndExpand"
+                        WidthRequest="192" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
-                <Label x:Name="lab_unit" Text="Unit :" />
-                <Picker x:Name="pic_unit" HorizontalOptions="FillAndExpand" />
+                <Label x:Name="lab_dateTime" 
+                       Text="Date :" 
+                       VerticalOptions="Center"/>
+                <DatePicker x:Name="pic_date" 
+                           WidthRequest="128"
+                            HorizontalOptions="EndAndExpand"/>
+                <TimePicker x:Name="pic_time" 
+                           WidthRequest="64"
+                           HorizontalOptions="EndAndExpand"/>
             </StackLayout>
 
             <Button x:Name="btn_submit" 

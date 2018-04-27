@@ -10,6 +10,7 @@
         <ListView x:Name="listView">
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:MasterPageItem}">
+                    <local:MasterPageItem Title="Welcome" IconSource="" TargetType="{x:Type local:Welcome}" />
                     <local:MasterPageItem Title="Add session" IconSource="" TargetType="{x:Type local:AddSession}" />
                     <local:MasterPageItem Title="View sessions" IconSource="" TargetType="{x:Type local:ViewSessionList}" />
                     <local:MasterPageItem Title="View units" IconSource="" TargetType="{x:Type local:ViewListJson}" />
