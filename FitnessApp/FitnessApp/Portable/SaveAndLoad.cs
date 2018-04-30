@@ -153,8 +153,15 @@ namespace FitnessApp.Portable
             if (Sessions == null)
                 Sessions = new List<Session>();
 
-            Sessions.Add(session);
-            SaveList(Sessions, sessionFile);
+            try
+            {
+                Sessions.Add(session);
+                SaveList(Sessions, sessionFile);
+            }
+            catch(Exception e)
+            {
+                DependencyService.Get<IMessage>().longtime(e.Message);
+            }
         }
 
         /// <summary>

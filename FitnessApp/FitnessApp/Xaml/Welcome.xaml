@@ -5,28 +5,32 @@
              x:Class="FitnessApp.Welcome"
              Title="Welcome" >
     <ContentPage.Content>
-        <StackLayout x:Name="no_user"
+        <StackLayout x:Name="user_form"
                      HorizontalOptions="CenterAndExpand">
-            <Label Text="Welcome to FitnessApp!"
+            <StackLayout x:Name="user_title"
+                     HorizontalOptions="CenterAndExpand">
+                <Label Text="Welcome to FitnessApp!"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
-            <StackLayout x:Name="old_user"
+                <StackLayout x:Name="user_logged"
                          HorizontalOptions="CenterAndExpand"
                          Orientation="Vertical">
                 <Label x:Name="user_name"
                        VerticalOptions="Start"
                        HorizontalOptions="CenterAndExpand"
                        Text="Username"/>
-                <Button Text="Logout"
-                            Clicked="Button_Logout"
-                            HorizontalOptions="Center"/>
+                <Button x:Name="btn_Logout"
+                        Text="Logout"
+                        Clicked="Button_Logout"
+                        HorizontalOptions="Center"/>
+                </StackLayout>
             </StackLayout>
-            <StackLayout x:Name="new_user"
+            <StackLayout x:Name="user_new"
                          HorizontalOptions="CenterAndExpand"
                          Orientation="Vertical">
                 <StackLayout Orientation="Horizontal">
                     <Label Text="User name:"
-                       VerticalOptions="Center"/>
+                           VerticalOptions="Center"/>
                     <Entry x:Name="in_username"
                            Placeholder="Username"
                            WidthRequest="192"
@@ -42,16 +46,17 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Password:"
-                       VerticalOptions="Center"/>
+                           VerticalOptions="Center"/>
                     <Entry x:Name="in_pwd"
                            Placeholder="password"
                            WidthRequest="192"
                            IsPassword="True"
                            HorizontalOptions="End"/>
                 </StackLayout>
-                <Button x:Name="Submit"
+                <Button x:Name="btn_Submit"
                         Text="Submit"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center"
+                        Clicked="Button_NewUser"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

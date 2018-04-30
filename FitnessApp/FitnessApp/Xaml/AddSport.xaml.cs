@@ -36,6 +36,7 @@ namespace FitnessApp
 
         private async void FillListViews()
         {
+            lis_units.Children.Clear();
             List<Unit> units = await SaveAndLoad.LoadUnits();
 
             foreach(Unit unit in units)
@@ -77,6 +78,7 @@ namespace FitnessApp
 
                 DependencyService.Get<IMessage>().shorttime("New sport type saved");
             }
+            Application.Current.MainPage = Page;
         }
 
         private void Button_SelectedUnit(Button btn)

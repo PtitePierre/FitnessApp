@@ -13,6 +13,7 @@
                 <Picker x:Name="pic_sportType" 
                         HorizontalOptions="EndAndExpand" 
                         WidthRequest="192"
+                        SelectedIndexChanged="Picker_SortUnits"
                         />
             </StackLayout>
 
