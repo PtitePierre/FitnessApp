@@ -15,7 +15,7 @@ namespace FitnessApp
 	{
 		public AddSession ()
         {
-            InitializeComponent ();
+            InitializeComponent();
             FillPickers();
         }
 
@@ -37,34 +37,27 @@ namespace FitnessApp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Button_Submit(object sender, EventArgs e)
         {
-            try
+            Session newSession = new Session();
+
+            if(in_quantity.Text != null && pic_sportType.SelectedItem != null && pic_unit.SelectedItem != null)
             {
-                Session newSession = new Session();
+                newSession.Quantity = float.Parse(in_quantity.Text);
+                newSession.SType = (SportType)pic_sportType.SelectedItem;
+                newSession.SUnit = (Unit)pic_unit.SelectedItem;
+                newSession.SDate = pic_date.Date + pic_time.Time;
 
-                if(in_quantity.Text != null && pic_sportType.SelectedItem != null && pic_unit.SelectedItem != null)
-                {
-                    newSession.Quantity = Int32.Parse(in_quantity.Text);
-                    newSession.SType = (SportType)pic_sportType.SelectedItem;
-                    newSession.SUnit = (Unit)pic_unit.SelectedItem;
-                    newSession.SDate = pic_date.Date + pic_time.Time;
+                SaveAndLoad.SaveSession(newSession);
 
-                    SaveAndLoad.SaveSession(newSession);
+                FillPickers();
+                in_quantity.Text = null;
 
-                    FillPickers();
-                    in_quantity.Text = null;
-
-                    DependencyService.Get<IMessage>().longtime("New session added");
-                }
-                else
-                {
-                    DependencyService.Get<IMessage>().longtime("Incomplete information");
-                }
+                DependencyService.Get<IMessage>().longtime("New session added");
             }
-            catch (Exception ex)
+            else
             {
-                DependencyService.Get<IMessage>().longtime(ex.Message);
+                DependencyService.Get<IMessage>().longtime("Incomplete information");
             }
         }
 
@@ -75,18 +68,26 @@ namespace FitnessApp
         /// <param name="e"></param>
         private async void Picker_SortUnits(object sender, EventArgs e)
         {
-            List<Unit> units = await SaveAndLoad.LoadUnits();
-            SportType sport = (SportType)pic_sportType.SelectedItem;
-            List<Unit> newUnits = new List<Unit>();
-
-            foreach (Unit unit in units)
+            if(pic_sportType.SelectedItem != null)
             {
-                if (sport.Units.Contains(unit.Id))
+                List<Unit> units = await SaveAndLoad.LoadUnits();
+                SportType sport = (SportType)pic_sportType.SelectedItem;
+                List<Unit> newUnits = new List<Unit>();
+
+                foreach (Unit unit in units)
                 {
-                    newUnits.Add(unit);
+                    if (sport.Units.Contains(unit.Id))
+                    {
+                        newUnits.Add(unit);
+                    }
                 }
+                pic_unit.ItemsSource = newUnits;
             }
-            pic_unit.ItemsSource = newUnits;
+            else
+            {
+                List<Unit> units = await SaveAndLoad.LoadUnits();
+                pic_unit.ItemsSource = units;
+            }
         }
     }
 }

@@ -148,7 +148,7 @@ namespace FitnessApp.Portable
         /// Save the list in the corresponding file
         /// </summary>
         /// <param name="session">new session to add</param>
-        public static void SaveSession(Session session)
+        public async static void SaveSession(Session session)
         {
             if (Sessions == null)
                 Sessions = new List<Session>();
@@ -156,7 +156,7 @@ namespace FitnessApp.Portable
             try
             {
                 Sessions.Add(session);
-                SaveList(Sessions, sessionFile);
+                await SaveList(Sessions, sessionFile);
             }
             catch(Exception e)
             {

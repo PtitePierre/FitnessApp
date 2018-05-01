@@ -86,7 +86,7 @@ namespace FitnessApp
             int id = Int32.Parse(btn.Text.Substring(0, btn.Text.IndexOf(".")));
             if (units_id.IndexOf(id) == -1)
             {
-                btn.BackgroundColor = Color.FromRgba(120, 50, 120, 120);
+                btn.BackgroundColor = Color.FromRgba(50, 120, 120, 120);
                 units_id.Add(id);
             }
             else

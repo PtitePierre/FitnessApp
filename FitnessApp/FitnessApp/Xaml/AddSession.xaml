@@ -53,7 +53,7 @@
                     BackgroundColor="#03AB17"
                     TextColor="White"
                     HorizontalOptions="CenterAndExpand"
-                    Clicked="Button_Clicked" />
+                    Clicked="Button_Submit" />
             
         </StackLayout>
     </ContentPage.Content>
