@@ -14,10 +14,9 @@ namespace FitnessApp
 	public partial class AddSession : ContentPage
 	{
         private static bool done = false;
-		public AddSession ()
+        public AddSession ()
         {
             InitializeComponent();
-            
             FillPickers();
         }
 
@@ -95,7 +94,7 @@ namespace FitnessApp
 
         private void Button_Done(object sender, EventArgs e)
         {
-            if(btn_done.Text == "To do")
+            if(!done)
             {
                 btn_done.Text = "Done";
                 btn_done.BackgroundColor = Color.FromHex("#03AB17");
@@ -104,7 +103,7 @@ namespace FitnessApp
             else
             {
                 btn_done.Text = "To do";
-                btn_done.BackgroundColor = Color.FromHex("#030303");
+                btn_done.BackgroundColor = Color.FromHex("#131313");
                 done = false;
             }
         }

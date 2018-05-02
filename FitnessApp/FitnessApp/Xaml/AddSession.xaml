@@ -60,7 +60,7 @@
                     Clicked="Button_Done" />
             </StackLayout>
 
-            <Button x:Name="btn_submit" 
+            <Button x:Name="btn_submit"
                     Text="Submit" 
                     BackgroundColor="#03AB17"
                     TextColor="White"

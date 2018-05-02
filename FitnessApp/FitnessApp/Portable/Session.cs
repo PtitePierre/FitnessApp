@@ -16,6 +16,23 @@ namespace FitnessApp.Portable
         override
         public string ToString()
         {
+            string str;
+            if (Done)
+            {
+                str = ToStringClassic();
+            }
+            else
+            {
+                //StringFormat = '{0:MMMM dd, yyyy}'  "DD HH:mm"
+                string format = @"dd\d\ hh\:mm\:ss";
+                string countdown = (SDate - DateTime.Now).ToString(format);
+                str = SType + " : " + Quantity + " " + SUnit.Code + "  " + countdown;
+            }
+            return str;
+        }
+
+        public string ToStringClassic()
+        {
             return SType+ " : " + Quantity + " " + SUnit.Code + "  " + SDate;
         }
     }

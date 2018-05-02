@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.More"
+             Title="More">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Reload data"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Reload units"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand"/>
+                <Button x:Name="btn_reloadUnit"
+                        Text="Load"
+                        HorizontalOptions="EndAndExpand"
+                        Clicked="Button_ReloadUnit"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Reload sports"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand"/>
+                <Button x:Name="btn_reloadSport"
+                        Text="Load"
+                        HorizontalOptions="EndAndExpand"
+                        Clicked="Button_ReloadSport"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Reload sessions"
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand"/>
+                <Button x:Name="btn_reloadSession"
+                        Text="Load"
+                        HorizontalOptions="EndAndExpand"
+                        Clicked="Button_ReloadSession"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

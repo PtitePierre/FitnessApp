@@ -28,12 +28,20 @@ namespace FitnessApp.Portable
         /// Load in the list Units the list of units from the Web service
         /// Or from the local file if the WS is not available
         /// </summary>
+        /// <param name="forced">force the loading from the web service even if Units contains something</param>
         /// <returns>the static list Units of Unit</returns>
-        public async static Task<List<Unit>> LoadUnits()
+        public async static Task<List<Unit>> LoadUnits(bool forced = false)
         {
             try
             {
-                Units = Units ?? await WSConsumer.GetUnits();
+                if (forced)
+                {
+                    Units = await WSConsumer.GetUnits();
+                }
+                else
+                {
+                    Units = Units ?? await WSConsumer.GetUnits();
+                }
             }
             catch(Exception e)
             {
@@ -47,12 +55,20 @@ namespace FitnessApp.Portable
         /// Load SportTypes from the WebService
         /// Or from the local file
         /// </summary>
+        /// <param name="forced">force to reload</param>
         /// <returns>SportTypes: list of SportType</returns>
-        public async static Task<List<SportType>> LoadSports()
+        public async static Task<List<SportType>> LoadSports(bool forced = false)
         {
             try
             {
-                SportTypes = SportTypes ?? await WSConsumer.GetSports();
+                if (forced)
+                {
+                    SportTypes = await WSConsumer.GetSports();
+                }
+                else
+                {
+                    SportTypes = SportTypes ?? await WSConsumer.GetSports();
+                }
             }
             catch (Exception e)
             {
@@ -65,8 +81,9 @@ namespace FitnessApp.Portable
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="forced">force reloading from web service</param>
         /// <returns>Sessions: list of Session</returns>
-        public async static Task<List<Session>> LoadSessions()
+        public async static Task<List<Session>> LoadSessions(bool forced = false)
         {
             Sessions = Sessions ?? await LoadList("session.json", Sessions);
             return Sessions;
