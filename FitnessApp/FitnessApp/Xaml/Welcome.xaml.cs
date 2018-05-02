@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessApp.Portable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,42 +13,58 @@ namespace FitnessApp
 	//[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Welcome : ContentPage
 	{
+        private static User user;
 		public Welcome ()
 		{
 			InitializeComponent ();
             CheckUser();
 		}
 
-        private void CheckUser()
+        private async void CheckUser()
         {
             // read user.json
-            bool hasUser = true;
+            user = await SaveAndLoad.LoadUser();
+
+            bool hasUser = (user!=null);
+
             if (hasUser)
             {
+                user_name.Text = user.Name;
                 user_logged.IsVisible = true;
-                user_new.IsVisible = false;
+                user_newORloggin.IsVisible = false;
             }
             else
             {
+                user_name.Text = null;
                 user_logged.IsVisible = false;
-                user_new.IsVisible = true;
+                user_newORloggin.IsVisible = true;
             }
         }
 
         private void Button_Logout(object sender, EventArgs e)
         {
-            InitializeComponent();
+            user = null;
 
             user_logged.IsVisible = false;
-            user_new.IsVisible = true;
+            user_newORloggin.IsVisible = true;
         }
 
         private void Button_NewUser(object sender,EventArgs e)
         {
-            InitializeComponent();
+            user = new User();
+            user.Name = in_username.Text;
+            user.Email = in_email.Text;
+            user.Password = in_pwd.Text;
+
+            SaveAndLoad.SaveUser(user);
 
             user_logged.IsVisible = true;
-            user_new.IsVisible = false;
+            user_newORloggin.IsVisible = false;
+        }
+
+        private void Button_Loggin(object sender, EventArgs e)
+        {
+
         }
 	}
 }

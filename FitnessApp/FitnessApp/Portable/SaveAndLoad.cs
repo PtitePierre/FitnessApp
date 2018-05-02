@@ -16,10 +16,12 @@ namespace FitnessApp.Portable
         static List<Unit> Units;
         static List<SportType> SportTypes;
         static List<Session> Sessions;
+        static User user;
 
         static string unitFile = "unit.json";
         static string sportFile = "sport.json";
         static string sessionFile = "session.json";
+        static string userFile = "user.json";
 
         #region Loading part
         /// <summary>
@@ -89,6 +91,31 @@ namespace FitnessApp.Portable
             list = JsonConvert.DeserializeObject<List<T>>(await file.ReadAllTextAsync());
 
             return list;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async static Task<User> LoadUser()
+        {
+            if (user == null)
+            {
+                try
+                {
+                    IFileSystem fileSystem = FileSystem.Current;
+                    IFolder folder = fileSystem.LocalStorage;
+                    IFile file = await folder.CreateFileAsync(userFile, CreationCollisionOption.OpenIfExists);
+
+                    user = JsonConvert.DeserializeObject<User>(await file.ReadAllTextAsync());
+                }
+                catch (Exception e)
+                {
+                    DependencyService.Get<IMessage>().longtime(e.Message);
+                }
+            }
+
+            return user;
         }
         #endregion
 
@@ -190,6 +217,23 @@ namespace FitnessApp.Portable
             await file.WriteAllTextAsync(JsonConvert.SerializeObject(list));
 
             return true;
+        }
+
+        public async static void SaveUser(User newUser)
+        {
+            try
+            {
+                user = newUser;
+                IFileSystem fileSystem = FileSystem.Current;
+                IFolder folder = fileSystem.LocalStorage;
+                IFile file = await folder.CreateFileAsync(userFile, CreationCollisionOption.OpenIfExists);
+
+                await file.WriteAllTextAsync(JsonConvert.SerializeObject(user));
+            }
+            catch (Exception e)
+            {
+                DependencyService.Get<IMessage>().longtime(e.Message);
+            }
         }
         #endregion
     }

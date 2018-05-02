@@ -13,9 +13,11 @@ namespace FitnessApp
 	//[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddSession : ContentPage
 	{
+        private static bool done = false;
 		public AddSession ()
         {
             InitializeComponent();
+            
             FillPickers();
         }
 
@@ -47,6 +49,7 @@ namespace FitnessApp
                 newSession.SType = (SportType)pic_sportType.SelectedItem;
                 newSession.SUnit = (Unit)pic_unit.SelectedItem;
                 newSession.SDate = pic_date.Date + pic_time.Time;
+                newSession.Done = done;
 
                 SaveAndLoad.SaveSession(newSession);
 
@@ -87,6 +90,22 @@ namespace FitnessApp
             {
                 List<Unit> units = await SaveAndLoad.LoadUnits();
                 pic_unit.ItemsSource = units;
+            }
+        }
+
+        private void Button_Done(object sender, EventArgs e)
+        {
+            if(btn_done.Text == "To do")
+            {
+                btn_done.Text = "Done";
+                btn_done.BackgroundColor = Color.FromHex("#03AB17");
+                done = true;
+            }
+            else
+            {
+                btn_done.Text = "To do";
+                btn_done.BackgroundColor = Color.FromHex("#030303");
+                done = false;
             }
         }
     }

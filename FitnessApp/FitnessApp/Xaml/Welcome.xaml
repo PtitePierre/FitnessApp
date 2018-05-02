@@ -25,38 +25,67 @@
                         HorizontalOptions="Center"/>
                 </StackLayout>
             </StackLayout>
-            <StackLayout x:Name="user_new"
+            <StackLayout x:Name="user_newORloggin"
                          HorizontalOptions="CenterAndExpand"
                          Orientation="Vertical">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="User name:"
+                <StackLayout x:Name="user_new"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="User name:"
                            VerticalOptions="Center"/>
-                    <Entry x:Name="in_username"
+                        <Entry x:Name="in_username"
                            Placeholder="Username"
                            WidthRequest="192"
                            HorizontalOptions="EndAndExpand"/>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Email:"
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Email:"
                        VerticalOptions="Center"/>
-                    <Entry x:Name="in_email"
+                        <Entry x:Name="in_email"
                            Placeholder="you@email.com"
                            WidthRequest="192"
                            HorizontalOptions="EndAndExpand"/>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Password:"
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Password:"
                            VerticalOptions="Center"/>
-                    <Entry x:Name="in_pwd"
+                        <Entry x:Name="in_pwd"
                            Placeholder="password"
                            WidthRequest="192"
                            IsPassword="True"
                            HorizontalOptions="End"/>
-                </StackLayout>
-                <Button x:Name="btn_Submit"
+                    </StackLayout>
+                    <Button x:Name="btn_Submit"
                         Text="Submit"
                         HorizontalOptions="Center"
                         Clicked="Button_NewUser"/>
+                </StackLayout>
+                <StackLayout x:Name="user_loggin"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="User name:"
+                           VerticalOptions="Center"/>
+                        <Entry x:Name="in_userLoggin"
+                           Placeholder="Username"
+                           WidthRequest="192"
+                           HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Password:"
+                           VerticalOptions="Center"/>
+                        <Entry x:Name="in_pwdloggin"
+                           Placeholder="password"
+                           WidthRequest="192"
+                           IsPassword="True"
+                           HorizontalOptions="End"/>
+                    </StackLayout>
+                    <Button x:Name="btn_Loggin"
+                        Text="Loggin"
+                        HorizontalOptions="Center"
+                        Clicked="Button_Loggin"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
