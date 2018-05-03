@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Reload data"
-                VerticalOptions="StartAndExpand" 
+                VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
             <StackLayout Orientation="Horizontal">
                 <Label Text="Reload units"
