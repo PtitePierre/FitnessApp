@@ -32,5 +32,18 @@ namespace FitnessApp
         {
             SaveAndLoad.LoadSessions(true);
         }
+        
+        private void Button_ShareFB(object sender, EventArgs e)
+        {
+            var message = "You clicked to share on FB!";
+            DependencyService.Get<IMessage>().longtime(message);
+        }
+
+        private void Button_ShareTwi(object sender, EventArgs e)
+        {
+            var message = "You clicked to share on Twitter!";
+            DependencyService.Get<IMessage>().longtime(message);
+        }
+        
     }
 }

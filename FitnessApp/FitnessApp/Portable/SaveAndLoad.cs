@@ -206,7 +206,7 @@ namespace FitnessApp.Portable
             try
             {
                 Sessions.Add(session);
-                await SaveList(Sessions, sessionFile);
+                session.Saved = await SaveList(Sessions, sessionFile);
             }
             catch(Exception e)
             {

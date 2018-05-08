@@ -16,6 +16,7 @@
                     <local:MasterPageItem Title="View units" IconSource="" TargetType="{x:Type local:ViewListJson}" />
                     <local:MasterPageItem Title="GPS Tracker" IconSource="" TargetType="{x:Type local:GpsTracker}" />
                     <local:MasterPageItem Title="More" IconSource="" TargetType="{x:Type local:More}" />
+                    <local:MasterPageItem Title="Timer Tool" IconSource="" TargetType="{x:Type local:TimerTool}" />
 
                 </x:Array>
             </ListView.ItemsSource>

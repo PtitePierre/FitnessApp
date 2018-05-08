@@ -4,14 +4,13 @@ using System.Text;
 
 namespace FitnessApp.Portable
 {
-    /*
-    enum weight_unit
+    
+    public enum weight_unit
     {
-        g,
         kg,
+        g,
         lb
     }
-    */
 
     public class Session
     {
@@ -21,6 +20,17 @@ namespace FitnessApp.Portable
         public DateTime SDate { get; set; }
         public SportType SType { get; set; }
         public bool Done { get; set; }
+        public float Weight { get; set; }
+        public weight_unit WUnit { get; set; }
+        public bool Saved { get; set; }
+
+        public Session()
+        {
+            // default
+            Weight = 0;
+            WUnit = weight_unit.kg;
+            Saved = false;
+        }
         
         override
         public string ToString()
