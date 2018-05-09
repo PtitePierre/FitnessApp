@@ -48,8 +48,6 @@ namespace FitnessApp.Portable
                 DependencyService.Get<IMessage>().longtime("ERR: " + e.Message);
                 Units = Units ?? await LoadList("unit.json", Units);
             }
-
-            Units.Sort((u1, u2) => u1.Name.CompareTo(u2.Name));
             return Units;
         }
 
@@ -77,8 +75,6 @@ namespace FitnessApp.Portable
                 DependencyService.Get<IMessage>().longtime("ERR: " + e.Message);
                 SportTypes = SportTypes ?? await LoadList("sport.json", SportTypes);
             }
-
-            SportTypes.Sort((s1, s2) => s1.Name.CompareTo(s2.Name));
             return SportTypes;
         }
 
@@ -90,8 +86,6 @@ namespace FitnessApp.Portable
         public async static Task<List<Session>> LoadSessions(bool forced = false)
         {
             Sessions = Sessions ?? await LoadList("session.json", Sessions);
-
-            Sessions.Sort((s1, s2) => s1.CompareTo(s2));
             return Sessions;
         }
 

@@ -13,7 +13,7 @@
                 <Picker x:Name="pic_sportType" 
                         HorizontalOptions="EndAndExpand" 
                         WidthRequest="192"
-                        SelectedIndexChanged="Picker_SelectSport"
+                        SelectedIndexChanged="Picker_SortUnits"
                         />
             </StackLayout>
 
@@ -59,27 +59,14 @@
                     HorizontalOptions="EndAndExpand"
                     Clicked="Button_Done" />
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label x:Name="lab_weight"
-                       Text="Weight"
-                       VerticalOptions="Center"/>
-                <Entry x:Name="in_weight"
-                       Keyboard="Numeric" 
-                       HorizontalOptions="EndAndExpand"
-                       WidthRequest="192" />
-                <Picker x:Name="pic_weightUnit"
-                       HorizontalOptions="EndAndExpand"
-                       WidthRequest="64"/>
-            </StackLayout>
+
             <Button x:Name="btn_submit"
                     Text="Submit" 
                     BackgroundColor="#03AB17"
                     TextColor="White"
                     HorizontalOptions="CenterAndExpand"
                     Clicked="Button_Submit" />
-
-            <ListView x:Name="lis_sessions" />
-
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

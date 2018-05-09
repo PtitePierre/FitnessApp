@@ -22,19 +22,14 @@ namespace FitnessApp
 
         private async void FillPickers()
         {
-            List<SportType> sports = await SaveAndLoad.LoadSports();
-            if (sports != null)
-            {
-                pic_sportType.ItemsSource = sports.OrderBy(s => s.Name).ToList();
-                pic_sportType.SelectedItem = null;
-            }
-
             List<Unit> units = await SaveAndLoad.LoadUnits();
-            if(units != null)
-            {
-                pic_unit.ItemsSource = units;
-                pic_unit.SelectedItem = null;
-            }
+            List<SportType> sports = await SaveAndLoad.LoadSports();
+
+            pic_unit.ItemsSource = units;
+            pic_sportType.ItemsSource = sports;
+
+            pic_unit.SelectedItem = null;
+            pic_sportType.SelectedItem = null;
         }
 
         /// <summary>
@@ -73,63 +68,27 @@ namespace FitnessApp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void Picker_SelectSport(object sender, EventArgs e)
+        private async void Picker_SortUnits(object sender, EventArgs e)
         {
-            try
+            if(pic_sportType.SelectedItem != null)
             {
-                if (pic_sportType.SelectedItem != null)
+                List<Unit> units = await SaveAndLoad.LoadUnits();
+                SportType sport = (SportType)pic_sportType.SelectedItem;
+                List<Unit> newUnits = new List<Unit>();
+
+                foreach (Unit unit in units)
                 {
-                    SportType sport = (SportType)pic_sportType.SelectedItem;
-
-                    List<Unit> units = await SaveAndLoad.LoadUnits();
-                    if (units != null)
+                    if (sport.Units.Contains(unit.Id))
                     {
-                        List<Unit> newUnits = new List<Unit>();
-
-                        foreach (Unit unit in units)
-                        {
-                            if (sport.Units.Contains(unit.Id))
-                            {
-                                newUnits.Add(unit);
-                            }
-                        }
-
-                        if (newUnits.Count != 0)
-                            pic_unit.ItemsSource = newUnits;
+                        newUnits.Add(unit);
                     }
-
-                    List<Session> sessions = await SaveAndLoad.LoadSessions();
-                    if (sessions != null)
-                    {
-                        List<Session> newSessions = new List<Session>();
-                        foreach (Session session in sessions)
-                        {
-                            if (session.SType == sport)
-                            {
-                                newSessions.Add(session);
-                            }
-                        }
-                        if (newSessions.Count != 0)
-                        {
-                            lis_sessions.ItemsSource = newSessions;
-                        }
-                    }
-
                 }
-                else
-                {
-                    List<Unit> units = await SaveAndLoad.LoadUnits();
-                    if (units != null)
-                        pic_unit.ItemsSource = units;
-
-                    List<Session> sessions = await SaveAndLoad.LoadSessions();
-                    if (sessions != null)
-                        lis_sessions.ItemsSource = sessions;
-                }
+                pic_unit.ItemsSource = newUnits;
             }
-            catch(Exception ex)
+            else
             {
-                DependencyService.Get<IMessage>().longtime("ERROR: "+ ex.Message);
+                List<Unit> units = await SaveAndLoad.LoadUnits();
+                pic_unit.ItemsSource = units;
             }
         }
 
