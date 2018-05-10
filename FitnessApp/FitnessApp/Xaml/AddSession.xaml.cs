@@ -68,27 +68,63 @@ namespace FitnessApp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void Picker_SortUnits(object sender, EventArgs e)
+        private async void Picker_SelectSport(object sender, EventArgs e)
         {
-            if(pic_sportType.SelectedItem != null)
+            try
             {
-                List<Unit> units = await SaveAndLoad.LoadUnits();
-                SportType sport = (SportType)pic_sportType.SelectedItem;
-                List<Unit> newUnits = new List<Unit>();
-
-                foreach (Unit unit in units)
+                if (pic_sportType.SelectedItem != null)
                 {
-                    if (sport.Units.Contains(unit.Id))
+                    SportType sport = (SportType)pic_sportType.SelectedItem;
+
+                    List<Unit> units = await SaveAndLoad.LoadUnits();
+                    if (units != null)
                     {
-                        newUnits.Add(unit);
+                        List<Unit> newUnits = new List<Unit>();
+
+                        foreach (Unit unit in units)
+                        {
+                            if (sport.Units.Contains(unit.Id))
+                            {
+                                newUnits.Add(unit);
+                            }
+                        }
+
+                        if (newUnits.Count != 0)
+                            pic_unit.ItemsSource = newUnits;
                     }
+
+                    List<Session> sessions = await SaveAndLoad.LoadSessions();
+                    if (sessions != null)
+                    {
+                        List<Session> newSessions = new List<Session>();
+                        foreach (Session session in sessions)
+                        {
+                            if (session.SType.Id == sport.Id)
+                            {
+                                newSessions.Add(session);
+                            }
+                        }
+                        if (newSessions != null)
+                        {
+                            lis_sessions.ItemsSource = newSessions;
+                        }
+                    }
+
                 }
-                pic_unit.ItemsSource = newUnits;
+                else
+                {
+                    List<Unit> units = await SaveAndLoad.LoadUnits();
+                    if (units != null)
+                        pic_unit.ItemsSource = units;
+
+                    List<Session> sessions = await SaveAndLoad.LoadSessions();
+                    if (sessions != null)
+                        lis_sessions.ItemsSource = sessions;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                List<Unit> units = await SaveAndLoad.LoadUnits();
-                pic_unit.ItemsSource = units;
+                DependencyService.Get<IMessage>().longtime("ERROR: " + ex.Message);
             }
         }
 
