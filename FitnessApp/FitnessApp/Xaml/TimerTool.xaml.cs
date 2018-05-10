@@ -24,7 +24,7 @@ namespace FitnessApp
             var message = "You clicked to start the timer!";
             DependencyService.Get<IMessage>().longtime(message);
 
-            /*
+            
             // Create an AutoResetEvent to signal the timeout threshold in the
             // timer callback has been reached.
             var autoEvent = new AutoResetEvent(false);
@@ -47,7 +47,7 @@ namespace FitnessApp
             autoEvent.WaitOne();
             stateTimer.Dispose();
             Console.WriteLine("\nDestroying timer.");
-            */
+            
         }
 	}
 }
