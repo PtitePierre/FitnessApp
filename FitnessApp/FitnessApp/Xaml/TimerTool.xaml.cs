@@ -24,30 +24,28 @@ namespace FitnessApp
             var message = "You clicked to start the timer!";
             DependencyService.Get<IMessage>().longtime(message);
 
-            
-            // Create an AutoResetEvent to signal the timeout threshold in the
-            // timer callback has been reached.
-            var autoEvent = new AutoResetEvent(false);
+            if(in_timerSpan.Text != null)
+            {
+                lab_time.Text = " / " + in_timerSpan.Text;
+                int max = Int32.Parse(in_timerSpan.Text);
+                int nb = 0;
 
-            var statusChecker = new StatusChecker(10);
+                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                {
+                    //var txt = (++nb).ToString();
+                    //DependencyService.Get<IMessage>().shorttime(txt);
 
-            // Create a timer that invokes CheckStatus after one second, 
-            // and every 1/4 second thereafter.
-            Console.WriteLine("{0:h:mm:ss.fff} Creating timer.\n",
-                              DateTime.Now);
-            var stateTimer = new Timer(statusChecker.CheckStatus,
-                                       autoEvent, 1000, 250);
+                    lab_ticks.Text = (++nb).ToString();
 
-            // When autoEvent signals, change the period to every half second.
-            autoEvent.WaitOne();
-            stateTimer.Change(0, 500);
-            Console.WriteLine("\nChanging period to .5 seconds.\n");
+                    return (nb < max); // True = Repeat again, False = Stop the timer
+                });
 
-            // When autoEvent signals the second time, dispose of the timer.
-            autoEvent.WaitOne();
-            stateTimer.Dispose();
-            Console.WriteLine("\nDestroying timer.");
-            
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().longtime("No time set.");
+            }
+
         }
 	}
 }
