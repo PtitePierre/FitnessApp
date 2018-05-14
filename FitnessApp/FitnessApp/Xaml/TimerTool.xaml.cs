@@ -8,6 +8,10 @@ using System.Threading;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microcharts;
+using SkiaSharp;
+using Microcharts.Forms;
+using Entry = Microcharts.Entry;
 
 namespace FitnessApp
 {
@@ -27,6 +31,7 @@ namespace FitnessApp
             var message = "You clicked to start the timer!";
             DependencyService.Get<IMessage>().longtime(message);
 
+
             if(in_timerSpan.Text != null)
             {
                 lab_time.Text = " / " + in_timerSpan.Text;
@@ -35,10 +40,8 @@ namespace FitnessApp
 
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
-                    //var txt = (++nb).ToString();
-                    //DependencyService.Get<IMessage>().shorttime(txt);
-
                     lab_ticks.Text = (++nb).ToString();
+                    UpDateTimer(nb, max);
 
                     return (nb < max); // True = Repeat again, False = Stop the timer
                 });
@@ -70,6 +73,26 @@ namespace FitnessApp
 
                 return (run); // True = Repeat again, False = Stop the timer
             });
+        }
+
+        private void UpDateTimer(int nb, int max)
+        {
+            // set chart entries
+            var entries = new[]{
+                     new Entry(max)
+                     {
+                         Label = "total",
+                         ValueLabel = max.ToString(),
+                         Color = SKColor.Parse("#3498db")
+                     },
+                     new Entry(nb)
+                     {
+                         Label = "done",
+                         ValueLabel = nb.ToString(),
+                         Color = SKColor.Parse("#2c3e50")
+                     }};
+
+            cha_chrono.Chart = new RadialGaugeChart() { Entries = entries };
         }
 	}
 }

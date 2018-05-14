@@ -26,6 +26,7 @@ namespace FitnessApp.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microcharts.Droid.Resource.String.library_name = global::FitnessApp.Droid.Resource.String.library_name;
 			global::PCLStorage.Resource.String.ApplicationName = global::FitnessApp.Droid.Resource.String.ApplicationName;
 			global::PCLStorage.Resource.String.Hello = global::FitnessApp.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::FitnessApp.Droid.Resource.Attribute.actionBarSize;
@@ -3734,6 +3735,9 @@ namespace FitnessApp.Droid
 			
 			// aapt resource value: 0x7f090038
 			public const int character_counter_pattern = 2131296312;
+			
+			// aapt resource value: 0x7f090040
+			public const int library_name = 2131296320;
 			
 			// aapt resource value: 0x7f090000
 			public const int mr_button_content_description = 2131296256;

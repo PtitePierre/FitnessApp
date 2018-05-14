@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FitnessApp.TimerTool">
+             x:Class="FitnessApp.TimerTool"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!"
@@ -16,6 +17,9 @@
                            Placeholder="secondes"
                            Keyboard="Numeric"/>
                 </StackLayout>
+
+                <forms:ChartView x:Name="cha_chrono"  
+                               HeightRequest="150"/>
 
                 <Button x:Name="btn_startTimer"
                     Text="Start"
