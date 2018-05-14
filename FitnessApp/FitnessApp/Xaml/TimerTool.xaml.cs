@@ -18,13 +18,11 @@ namespace FitnessApp
 	//[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TimerTool : ContentPage
     {
-        private bool run;
         private bool timer_run;
-        private DateTime start;
+
         public TimerTool ()
 		{
 			InitializeComponent ();
-            run = false;
             timer_run = false;
         }
 
@@ -71,27 +69,6 @@ namespace FitnessApp
 
         }
 
-        private void Button_StartChrono(object sender, EventArgs e)
-        {
-            if (!run)
-            {
-                run = true;
-                btn_chrono.Text = "Stop";
-                start = DateTime.Now;
-            }
-            else
-            {
-                run = false;
-                btn_chrono.Text = "Start";
-            }
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-            {
-                lab_chrono.Text = (DateTime.Now - start).ToString(@"hh\:mm\:ss");
-
-                return (run); // True = Repeat again, False = Stop the timer
-            });
-        }
-
         private void UpDateTimer(int nb, int max)
         {
             // set chart entries
@@ -109,7 +86,9 @@ namespace FitnessApp
                          Color = SKColor.Parse("#2c3e50")
                      }};
 
-            cha_chrono.Chart = new RadialGaugeChart() { Entries = entries };
+            RadialGaugeChart c = new RadialGaugeChart() { Entries = entries };
+            c.LabelTextSize = 0;
+            cha_chrono.Chart = c;
         }
 	}
 }

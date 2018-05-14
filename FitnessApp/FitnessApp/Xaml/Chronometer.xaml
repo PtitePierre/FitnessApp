@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.Chronometer"
+             Title="Chronometer">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label x:Name="lab_chrono"
+                       Text="00:00:00"
+                       FontSize="Large"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"/>
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="End">
+                    <Button x:Name="btn_start"
+                            Text="Start"
+                            Clicked="Button_StartChrono"/>
+                    <Button x:Name="btn_pause"
+                            Text="Stop"
+                            Clicked="Button_PauseChrono"/>
+                    <Button x:Name="btn_reset"
+                            Text="Reset"
+                            Clicked="Button_ResetChrono"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

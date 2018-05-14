@@ -22,10 +22,6 @@
                 <forms:ChartView x:Name="cha_chrono"  
                                HeightRequest="150"/>
 
-                <Button x:Name="btn_startTimer"
-                    Text="Start"
-                    Clicked="Button_StartTimer"/>
-
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="CenterAndExpand">
                     <Label x:Name="lab_ticks"
@@ -33,14 +29,10 @@
                     <Label x:Name="lab_time"
                            Text=" / 00"/>
                 </StackLayout>
-            </StackLayout>
-            <StackLayout Orientation="Vertical">
-                <Label x:Name="lab_chrono"
-                       Text="00:00:00"
-                       HorizontalOptions="CenterAndExpand"/>
-                <Button x:Name="btn_chrono"
-                        Text="Start"
-                        Clicked="Button_StartChrono"/>
+
+                <Button x:Name="btn_startTimer"
+                    Text="Start"
+                    Clicked="Button_StartTimer"/>
             </StackLayout>
         </StackLayout>        
     </ContentPage.Content>
