@@ -26,10 +26,9 @@ namespace FitnessApp.Droid
 
         public bool PlayAlarm()
         {
-            using (Ringtone r = RingtoneManager.GetRingtone(
-                Android.App.Application.Context, 
-                RingtoneManager.GetDefaultUri(RingtoneType.Alarm)
-                )) { r.Play(); }
+            Android.Net.Uri notification = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
+            MediaPlayer mp = MediaPlayer.Create(Android.App.Application.Context, notification);
+            mp.Start();
 
             return true;
         }

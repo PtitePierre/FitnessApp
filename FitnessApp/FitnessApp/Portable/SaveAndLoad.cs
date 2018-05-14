@@ -158,8 +158,8 @@ namespace FitnessApp.Portable
                     Units = new List<Unit>();
 
                 Units.Add(unit);
-                SaveList(Units, unitFile);
             }
+            SaveList(Units, unitFile);
         }
 
         /// <summary>
@@ -183,8 +183,8 @@ namespace FitnessApp.Portable
                     SportTypes = new List<SportType>();
 
                 SportTypes.Add(sport);
-                SaveList(SportTypes, sportFile);
             }
+            SaveList(SportTypes, sportFile);
         }
 
         /// <summary>
@@ -208,6 +208,11 @@ namespace FitnessApp.Portable
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="old"></param>
+        /// <param name="session"></param>
         public async static void UpDateSession(Session old, Session session)
         {
             try
@@ -252,6 +257,10 @@ namespace FitnessApp.Portable
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newUser"></param>
         public async static void SaveUser(User newUser)
         {
             try

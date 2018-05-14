@@ -28,49 +28,49 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Xaml\App.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Xaml\PageAndNav\App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Xaml\ViewListJson.xaml.cs">
+    <Compile Update="Xaml\Views\ViewListJson.xaml.cs">
       <DependentUpon>ViewListJson.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Xaml\MainPage.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Xaml\PageAndNav\MainPage.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Xaml\AddSession.xaml">
+    <EmbeddedResource Update="Xaml\EditObjects\AddSession.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\AddSport.xaml">
+    <EmbeddedResource Update="Xaml\EditObjects\AddSport.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\AddUnit.xaml">
+    <EmbeddedResource Update="Xaml\EditObjects\AddUnit.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\Chronometer.xaml">
+    <EmbeddedResource Update="Xaml\Tools\Chronometer.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\More.xaml">
+    <EmbeddedResource Update="Xaml\Tools\More.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\TimerTool.xaml">
+    <EmbeddedResource Update="Xaml\Tools\TimerTool.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\ViewListJson.xaml">
+    <EmbeddedResource Update="Xaml\Views\ViewListJson.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\GpsTracker.xaml">
+    <EmbeddedResource Update="Xaml\Tools\GpsTracker.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\MasterPage.xaml">
+    <EmbeddedResource Update="Xaml\PageAndNav\MasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\ViewSessionList.xaml">
+    <EmbeddedResource Update="Xaml\Views\ViewSessionList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Xaml\Welcome.xaml">
+    <EmbeddedResource Update="Xaml\PageAndNav\Welcome.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

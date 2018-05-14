@@ -14,9 +14,10 @@ namespace FitnessApp.Portable
         private static HttpClient restClient;
 
         /// <summary>
-        /// 
+        /// get the list of unit from the web service
+        /// throw an exception if any
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of Unit</returns>
         public async static Task<List<Unit>> GetUnits()
         {
             List<Unit> units = new List<Unit>();
@@ -37,9 +38,9 @@ namespace FitnessApp.Portable
         }
 
         /// <summary>
-        /// 
+        /// send unit to the web service to save it as a new one
         /// </summary>
-        /// <param name="unit"></param>
+        /// <param name="unit">new Unit</param>
         /// <returns></returns>
         public async static Task<List<Unit>> AddUnit(Unit unit)
         {
@@ -63,9 +64,9 @@ namespace FitnessApp.Portable
         }
 
         /// <summary>
-        /// 
+        /// get the list of SportType from the Web Service
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of SportType</returns>
         public async static Task<List<SportType>> GetSports()
         {
             List<SportType> sports = new List<SportType>();
@@ -86,10 +87,10 @@ namespace FitnessApp.Portable
         }
 
         /// <summary>
-        /// 
+        /// send a new SportType to the Web Service to save it
         /// </summary>
-        /// <param name="sport"></param>
-        /// <returns></returns>
+        /// <param name="sport">new SportType</param>
+        /// <returns>list of SportType</returns>
         public static async Task<List<SportType>> AddSport(SportType sport)
         {
             List<SportType> sports = new List<SportType>();
@@ -112,12 +113,26 @@ namespace FitnessApp.Portable
             return sports;
         }
 
-        public List<Session> GetSessions()
+        /// <summary>
+        /// Get the list of sessions for user (-> user_id)
+        /// </summary>
+        /// <returns>list of Session</returns>
+        public async Task<List<Session>> GetSessions(int user_id)
         {
             List<Session> sessions = new List<Session>();
             // TO DO:
             // Get the json data from the web service
             // deserialize the data into sessions
+            try
+            {
+                sessions = await GetList<Session>("http://psotty.pythonanywhere.com/sessions/"+user_id);
+
+                DependencyService.Get<IMessage>().shorttime("Sessions loaded from Web Service");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
             return sessions;
         }
 
