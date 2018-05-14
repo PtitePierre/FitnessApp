@@ -21,12 +21,21 @@
                     Text="Start"
                     Clicked="Button_StartTimer"/>
 
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand">
                     <Label x:Name="lab_ticks"
                            Text="00"/>
                     <Label x:Name="lab_time"
                            Text=" / 00"/>
                 </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label x:Name="lab_chrono"
+                       Text="00:00:00"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Button x:Name="btn_chrono"
+                        Text="Start"
+                        Clicked="Button_StartChrono"/>
             </StackLayout>
         </StackLayout>        
     </ContentPage.Content>

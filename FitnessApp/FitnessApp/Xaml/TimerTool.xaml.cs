@@ -13,10 +13,13 @@ namespace FitnessApp
 {
 	//[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TimerTool : ContentPage
-	{
-		public TimerTool ()
+    {
+        private bool run;
+        private DateTime start;
+        public TimerTool ()
 		{
 			InitializeComponent ();
+            run = false;
         }
 
         private void Button_StartTimer(object sender, EventArgs e)
@@ -46,6 +49,27 @@ namespace FitnessApp
                 DependencyService.Get<IMessage>().longtime("No time set.");
             }
 
+        }
+
+        private void Button_StartChrono(object sender, EventArgs e)
+        {
+            if (!run)
+            {
+                run = true;
+                btn_chrono.Text = "Stop";
+                start = DateTime.Now;
+            }
+            else
+            {
+                run = false;
+                btn_chrono.Text = "Start";
+            }
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                lab_chrono.Text = (DateTime.Now - start).ToString(@"hh\:mm\:ss");
+
+                return (run); // True = Repeat again, False = Stop the timer
+            });
         }
 	}
 }
