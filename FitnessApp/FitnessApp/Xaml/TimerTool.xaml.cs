@@ -19,37 +19,54 @@ namespace FitnessApp
 	public partial class TimerTool : ContentPage
     {
         private bool run;
+        private bool timer_run;
         private DateTime start;
         public TimerTool ()
 		{
 			InitializeComponent ();
             run = false;
+            timer_run = false;
         }
 
         private void Button_StartTimer(object sender, EventArgs e)
         {
-            var message = "You clicked to start the timer!";
-            DependencyService.Get<IMessage>().longtime(message);
-
-
-            if(in_timerSpan.Text != null)
+            if (!timer_run)
             {
-                lab_time.Text = " / " + in_timerSpan.Text;
-                int max = Int32.Parse(in_timerSpan.Text);
-                int nb = 0;
+                var message = "You clicked to start the timer!";
+                DependencyService.Get<IMessage>().longtime(message);
 
-                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+
+                if (in_timerSpan.Text != null)
                 {
-                    lab_ticks.Text = (++nb).ToString();
-                    UpDateTimer(nb, max);
+                    lab_time.Text = " / " + in_timerSpan.Text;
+                    int max = Int32.Parse(in_timerSpan.Text);
+                    int nb = 0;
+                    timer_run = true;
 
-                    return (nb < max); // True = Repeat again, False = Stop the timer
-                });
+                    Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                    {
+                        lab_ticks.Text = (++nb).ToString();
+                        UpDateTimer(nb, max);
 
+                        if (max - nb < 3)
+                            DependencyService.Get<IAudio>().PlayAlarm();
+
+                        if (nb == max)
+                        {
+                            timer_run = false;
+                        }
+
+                        return (timer_run); // True = Repeat again, False = Stop the timer
+                    });
+                }
+                else
+                {
+                    DependencyService.Get<IMessage>().longtime("No time set.");
+                }
             }
             else
             {
-                DependencyService.Get<IMessage>().longtime("No time set.");
+
             }
 
         }

@@ -58,6 +58,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio_Droid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Message_Droid.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -89,5 +90,6 @@
       <Name>FitnessApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

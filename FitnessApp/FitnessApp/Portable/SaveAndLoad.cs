@@ -208,6 +208,22 @@ namespace FitnessApp.Portable
             }
         }
 
+        public async static void UpDateSession(Session old, Session session)
+        {
+            try
+            {
+                if (Sessions.Contains(old))
+                {
+                    Sessions[Sessions.IndexOf(old)] = session;
+                }
+                session.Saved = await SaveList(Sessions, sessionFile);
+            }
+            catch (Exception e)
+            {
+                DependencyService.Get<IMessage>().longtime(e.Message);
+            }
+        }
+
         /// <summary>
         /// Save all the data localy in their corresponding files
         /// </summary>

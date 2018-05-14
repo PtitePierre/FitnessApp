@@ -14,10 +14,36 @@ namespace FitnessApp
 	public partial class AddSession : ContentPage
 	{
         private static bool done = false;
-        public AddSession ()
+        private Session session, oldS;
+        private Page Page;
+        private bool edit;
+
+        public AddSession (Page page, Session old = null)
         {
+            Page = page;
             InitializeComponent();
             FillPickers();
+
+            if (old != null)
+            {
+                edit = true;
+                oldS = old;
+                pic_sportType.SelectedItem = old.SType;
+                in_quantity.Text = old.Quantity.ToString();
+                pic_date.Date = old.SDate;
+                pic_time.Time = old.SDate.TimeOfDay;
+                pic_unit.SelectedItem = old.SUnit;
+
+                this.session = old;
+                this.Title = "Edit a Session";
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().shorttime("no unit parameter");
+                this.session = new Session();
+                edit = false;
+                this.Title = "Create a Session";
+            }
         }
 
         private async void FillPickers()
@@ -40,27 +66,38 @@ namespace FitnessApp
         /// <param name="e"></param>
         private void Button_Submit(object sender, EventArgs e)
         {
-            Session newSession = new Session();
-
             if(in_quantity.Text != null && pic_sportType.SelectedItem != null && pic_unit.SelectedItem != null)
             {
-                newSession.Quantity = float.Parse(in_quantity.Text);
-                newSession.SType = (SportType)pic_sportType.SelectedItem;
-                newSession.SUnit = (Unit)pic_unit.SelectedItem;
-                newSession.SDate = pic_date.Date + pic_time.Time;
-                newSession.Done = done;
+                session.Quantity = float.Parse(in_quantity.Text);
+                session.SType = (SportType)pic_sportType.SelectedItem;
+                session.SUnit = (Unit)pic_unit.SelectedItem;
+                session.SDate = pic_date.Date + pic_time.Time;
+                session.Done = done;
 
-                SaveAndLoad.SaveSession(newSession);
+                if (edit)
+                {
+                    SaveAndLoad.UpDateSession(oldS, session);
+                }
+                else
+                {
+                    SaveAndLoad.SaveSession(session);
+                }
 
                 FillPickers();
                 in_quantity.Text = null;
 
-                DependencyService.Get<IMessage>().longtime("New session added");
+                //DependencyService.Get<IMessage>().longtime("New session added");
+                Application.Current.MainPage = Page;
             }
             else
             {
                 DependencyService.Get<IMessage>().longtime("Incomplete information");
             }
+        }
+
+        private void Button_Cancel(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = Page;
         }
 
         /// <summary>
@@ -97,16 +134,17 @@ namespace FitnessApp
                     if (sessions != null)
                     {
                         List<Session> newSessions = new List<Session>();
-                        foreach (Session session in sessions)
+                        foreach (Session ss in sessions)
                         {
-                            if (session.SType.Id == sport.Id)
+                            if (ss.SType.Id == sport.Id)
                             {
-                                newSessions.Add(session);
+                                newSessions.Add(ss);
                             }
                         }
                         if (newSessions != null)
                         {
                             lis_sessions.ItemsSource = newSessions;
+                            lis_sessions.ItemSelected += ListSession_ItemSelec;
                         }
                     }
 
@@ -142,6 +180,16 @@ namespace FitnessApp
                 btn_done.BackgroundColor = Color.FromHex("#131313");
                 done = false;
             }
+        }
+
+        private void ListSession_ItemSelec(object sender, EventArgs e)
+        {
+            Session old = (Session) lis_sessions.SelectedItem;
+            pic_sportType.SelectedItem = old.SType;
+            in_quantity.Text = old.Quantity.ToString();
+            pic_date.Date = old.SDate;
+            pic_time.Time = old.SDate.TimeOfDay;
+            pic_unit.SelectedItem = old.SUnit;
         }
     }
 }

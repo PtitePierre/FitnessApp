@@ -32,7 +32,7 @@ namespace FitnessApp
 
         private void Button_CancelClicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = Page;            
+            Application.Current.MainPage = Page;
         }
 
         private void Button_SubmitClicked(object sender, EventArgs e)
@@ -47,7 +47,12 @@ namespace FitnessApp
 
                 in_Name.Text = null;
                 in_Code.Text = null;
-                DependencyService.Get<IMessage>().shorttime("New unit saved");
+
+                Application.Current.MainPage = Page;
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().shorttime("Incomplete information!");
             }
         }
 	}

@@ -11,12 +11,11 @@
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:MasterPageItem}">
                     <local:MasterPageItem Title="Welcome" IconSource="" TargetType="{x:Type local:Welcome}" />
-                    <local:MasterPageItem Title="Add session" IconSource="" TargetType="{x:Type local:AddSession}" />
-                    <local:MasterPageItem Title="View sessions" IconSource="" TargetType="{x:Type local:ViewSessionList}" />
-                    <local:MasterPageItem Title="View units" IconSource="" TargetType="{x:Type local:ViewListJson}" />
-                    <local:MasterPageItem Title="GPS Tracker" IconSource="" TargetType="{x:Type local:GpsTracker}" />
+                    <local:MasterPageItem Title="Sessions" IconSource="" TargetType="{x:Type local:ViewSessionList}" />
+                    <local:MasterPageItem Title="Units and Sports" IconSource="" TargetType="{x:Type local:ViewListJson}" />
                     <local:MasterPageItem Title="More" IconSource="" TargetType="{x:Type local:More}" />
-                    <local:MasterPageItem Title="Timer Tool" IconSource="" TargetType="{x:Type local:TimerTool}" />
+                    <local:MasterPageItem Title="Timer Tools" IconSource="" TargetType="{x:Type local:TimerTool}" />
+                    <local:MasterPageItem Title="GPS Tracker" IconSource="" TargetType="{x:Type local:GpsTracker}" />
 
                 </x:Array>
             </ListView.ItemsSource>

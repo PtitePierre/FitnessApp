@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FitnessApp.AddSession"
-             Title="Add Session">
+             Title="Session">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal" >
@@ -73,12 +73,20 @@
                        WidthRequest="64"/>
             </StackLayout>
 
-            <Button x:Name="btn_submit"
+            <StackLayout Orientation="Horizontal"
+                    HorizontalOptions="CenterAndExpand">
+                <Button x:Name="btn_submit"
                     Text="Submit" 
                     BackgroundColor="#03AB17"
                     TextColor="White"
-                    HorizontalOptions="CenterAndExpand"
                     Clicked="Button_Submit" />
+                <Button x:Name="btn_cancel"
+                    Text="Cancel" 
+                    BackgroundColor="#9B0317"
+                    TextColor="White"
+                    Clicked="Button_Cancel" />
+
+            </StackLayout>
 
             <ListView x:Name="lis_sessions" />
 
