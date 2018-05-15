@@ -34,6 +34,7 @@ namespace FitnessApp
 
             lis_sessions.ItemsSource = sessions;
             lis_sessions.ItemSelected += ListItem_Selected;
+            lis_sessions.SelectedItem = null;
 
             SetChart();
         }
@@ -43,7 +44,7 @@ namespace FitnessApp
             try
             {
                 Session session = (Session)lis_sessions.SelectedItem;
-                // lis_sessions.SelectedItem = null;
+                //lis_sessions.SelectedItem = null;
                 Application.Current.MainPage = new NavigationPage(new AddSession(Application.Current.MainPage, session));
             }
             catch(Exception ex)

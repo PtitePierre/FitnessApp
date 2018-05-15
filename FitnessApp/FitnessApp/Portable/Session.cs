@@ -68,10 +68,10 @@ namespace FitnessApp.Portable
             if(compareSession == null)
                 return -1;
 
-            if(String.Compare(this.SType.Name, compareSession.SType.Name) == 0)
-                return DateTime.Compare(this.SDate, compareSession.SDate);
-            else
+            if(DateTime.Compare(this.SDate, compareSession.SDate) == 0)
                 return String.Compare(this.SType.Name, compareSession.SType.Name);
+            else
+                return DateTime.Compare(this.SDate, compareSession.SDate);
         }
     }
 }

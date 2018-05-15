@@ -32,22 +32,5 @@ namespace FitnessApp.Droid
 
             return true;
         }
-        /*
-        public bool PlayMp3File(string fileName)
-        {
-            _mediaPlayer = MediaPlayer.Create(global::Android.App.Application.Context, Resource.Raw.test);
-            _mediaPlayer.Start();
-
-            return true;
-        }
-
-        public bool PlayWavFile(string fileName)
-        {
-            _mediaPlayer = MediaPlayer.Create(global::Android.App.Application.Context, Resource.Raw.ding_persevy);
-            _mediaPlayer.Start();
-
-            return true;
-        }
-        */
     }
 }

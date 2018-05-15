@@ -54,7 +54,7 @@
                        VerticalOptions="Center"/>
                 <Button x:Name="btn_done"
                     Text="To do"                    
-                    BackgroundColor="#030303"
+                    BackgroundColor="#AB1717"
                     TextColor="White"
                     HorizontalOptions="EndAndExpand"
                     Clicked="Button_Done" />

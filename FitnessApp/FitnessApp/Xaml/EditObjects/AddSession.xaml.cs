@@ -22,8 +22,24 @@ namespace FitnessApp
         {
             Page = page;
             InitializeComponent();
-            FillPickers();
+            FillPickers(old);
 
+            //CheckOld(old);
+        }
+
+        private async void FillPickers(Session old)
+        {
+            List<Unit> units = await SaveAndLoad.LoadUnits();
+            List<SportType> sports = await SaveAndLoad.LoadSports();
+
+            pic_unit.ItemsSource = units;
+            pic_sportType.ItemsSource = sports;
+
+            CheckOld(old);
+        }
+
+        private void CheckOld(Session old)
+        {
             if (old != null)
             {
                 edit = true;
@@ -33,29 +49,21 @@ namespace FitnessApp
                 pic_date.Date = old.SDate;
                 pic_time.Time = old.SDate.TimeOfDay;
                 pic_unit.SelectedItem = old.SUnit;
+                done = old.Done;
 
                 this.session = old;
                 this.Title = "Edit a Session";
             }
             else
             {
-                DependencyService.Get<IMessage>().shorttime("no unit parameter");
+                pic_unit.SelectedItem = null;
+                pic_sportType.SelectedItem = null;
+
                 this.session = new Session();
                 edit = false;
                 this.Title = "Create a Session";
             }
-        }
-
-        private async void FillPickers()
-        {
-            List<Unit> units = await SaveAndLoad.LoadUnits();
-            List<SportType> sports = await SaveAndLoad.LoadSports();
-
-            pic_unit.ItemsSource = units;
-            pic_sportType.ItemsSource = sports;
-
-            pic_unit.SelectedItem = null;
-            pic_sportType.SelectedItem = null;
+            CheckDone(done);
         }
 
         /// <summary>
@@ -75,18 +83,10 @@ namespace FitnessApp
                 session.Done = done;
 
                 if (edit)
-                {
                     SaveAndLoad.UpDateSession(oldS, session);
-                }
                 else
-                {
                     SaveAndLoad.SaveSession(session);
-                }
 
-                FillPickers();
-                in_quantity.Text = null;
-
-                //DependencyService.Get<IMessage>().longtime("New session added");
                 Application.Current.MainPage = Page;
             }
             else
@@ -121,9 +121,7 @@ namespace FitnessApp
                         foreach (Unit unit in units)
                         {
                             if (sport.Units.Contains(unit.Id))
-                            {
                                 newUnits.Add(unit);
-                            }
                         }
 
                         if (newUnits.Count != 0)
@@ -137,9 +135,7 @@ namespace FitnessApp
                         foreach (Session ss in sessions)
                         {
                             if (ss.SType.Id == sport.Id)
-                            {
                                 newSessions.Add(ss);
-                            }
                         }
                         if (newSessions != null)
                         {
@@ -168,7 +164,12 @@ namespace FitnessApp
 
         private void Button_Done(object sender, EventArgs e)
         {
-            if(!done)
+            CheckDone(done);
+        }
+
+        private void CheckDone(bool done)
+        {
+            if (!done)
             {
                 btn_done.Text = "Done";
                 btn_done.BackgroundColor = Color.FromHex("#03AB17");
@@ -177,7 +178,7 @@ namespace FitnessApp
             else
             {
                 btn_done.Text = "To do";
-                btn_done.BackgroundColor = Color.FromHex("#131313");
+                btn_done.BackgroundColor = Color.FromHex("#AB1717");
                 done = false;
             }
         }

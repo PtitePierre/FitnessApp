@@ -86,6 +86,7 @@ namespace FitnessApp.Portable
         public async static Task<List<Session>> LoadSessions(bool forced = false)
         {
             Sessions = Sessions ?? await LoadList("session.json", Sessions);
+            Sessions.Sort((x, y) => x.CompareTo(y));
             return Sessions;
         }
 
