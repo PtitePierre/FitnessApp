@@ -2,12 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FitnessApp.Statistics"
-             Title="Statistics">
+             Title="Statistics"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Your Statistics :"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
+
+            <forms:ChartView x:Name="cha_sports"  
+                               HeightRequest="150"/>
+            
+            <!-- 
+            favorite moments to practice
+            favorite sports
+            favorite days
+            best "scores" per sport
+            ...
+            -->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

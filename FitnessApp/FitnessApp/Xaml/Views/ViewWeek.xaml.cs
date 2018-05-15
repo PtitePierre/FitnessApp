@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using FitnessApp.Portable;
 
 namespace FitnessApp
 {
@@ -16,5 +17,15 @@ namespace FitnessApp
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void Button_NextWeek(object sender, EventArgs e)
+        {
+            DependencyService.Get<IMessage>().shorttime("Next Week");
+        }
+
+        private void Button_PrevWeek(object sender, EventArgs e)
+        {
+            DependencyService.Get<IMessage>().shorttime("Prev Week");
+        }
+    }
 }
