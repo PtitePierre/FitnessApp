@@ -28,6 +28,16 @@ namespace FitnessApp
         {
             lab_week.Text = "Sessions of the Week #" + GetIso8601WeekOfYear(day);
             List<Session> sessions = await SaveAndLoad.LoadSessions();
+
+            List<Session> weekSessions = new List<Session>();
+
+            foreach(Session s in sessions)
+            {
+                if (GetIso8601WeekOfYear(s.SDate) == GetIso8601WeekOfYear(day))
+                    weekSessions.Add(s);
+            }
+
+            lis_sessions.ItemsSource = weekSessions;
         }
 
         private void Button_NextWeek(object sender, EventArgs e)
