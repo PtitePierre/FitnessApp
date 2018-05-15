@@ -20,7 +20,8 @@
                         WidthRequest="64"
                         Clicked="Button_PrevWeek"/>
                 
-                <Label Text="Sessions of the Week #"
+                <Label x:Name="lab_week"
+                       Text="Sessions of the Week #"
                        VerticalOptions="Center"
                        HorizontalOptions="CenterAndExpand"/>
 
