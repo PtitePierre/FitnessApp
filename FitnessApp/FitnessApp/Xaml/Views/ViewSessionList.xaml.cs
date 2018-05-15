@@ -69,14 +69,9 @@ namespace FitnessApp
                 foreach (Session session in sessions)
                 {
                     if (sports.ContainsKey(session.SType.Name))
-                    {
                         sports[session.SType.Name]++;
-                    }
                     else
-                    {
                         sports.Add(session.SType.Name, 1);
-                        //sports[session.SType.Name] = 1;
-                    }
                 }
 
                 int num = 0;
