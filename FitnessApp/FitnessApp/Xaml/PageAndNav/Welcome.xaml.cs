@@ -52,6 +52,7 @@ namespace FitnessApp
         /// <param name="e"></param>
         private void Button_Logout(object sender, EventArgs e)
         {
+            user_name.Text = null;
             user = null;
             SaveAndLoad.Logout();
 
@@ -76,6 +77,7 @@ namespace FitnessApp
 
             user_logged.IsVisible = true;
             user_newORloggin.IsVisible = false;
+            CheckUser();
         }
 
         /// <summary>
