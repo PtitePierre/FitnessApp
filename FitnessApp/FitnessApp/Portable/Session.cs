@@ -26,7 +26,7 @@ namespace FitnessApp.Portable
             Weight = 0;
             WUnit = "kg";
             Saved = false;
-            user_id = SaveAndLoad.LoadUser().Id;
+            user_id = SaveAndLoad.GetUser().Id;
 
             if(SUnit == null)
                 SUnit = SaveAndLoad.GetUnit(sunit_id);
@@ -38,7 +38,7 @@ namespace FitnessApp.Portable
         public string ToString()
         {
             string str;
-            if (SDate > DateTime.Now)
+            if (SDate < DateTime.Now)
             {
                 str = ToStringClassic();
             }
@@ -72,15 +72,7 @@ namespace FitnessApp.Portable
             if (SType == null)
                 SType = SaveAndLoad.GetSport(stype_id);
 
-            string json = "{\"stype_id\":"+ SType.Id
-                +",\"sunit_id\":"+ SUnit.Id
-                +",\"user_id\":"+ user_id
-                +",\"sdate\":"+ JsonConvert.SerializeObject(SDate)
-                +",\"quantity\":"+ Quantity
-                +",\"weight\":"+ Weight
-                +",\"wunit\":"+ WUnit
-                +",\"done\":"+ Done +"}";
-
+            string json = JsonConvert.SerializeObject(new SimpleSession(this));
 
             return json;
         }
@@ -112,6 +104,33 @@ namespace FitnessApp.Portable
                 SType = SaveAndLoad.GetSport(stype_id);
 
             return SUnit.GetCoef();
+        }
+    }
+
+
+    public class SimpleSession
+    {
+        public int id { get; set; }
+        public float quantity { get; set; }
+        public DateTime sdate { get; set; }
+        public int done { get; set; }
+        public float weight { get; set; }
+        public string wunit { get; set; }
+        public int user_id { get; set; }
+        public int stype_id { get; set; }
+        public int sunit_id { get; set; }
+
+        public SimpleSession(Session src)
+        {
+            id = src.Id;
+            quantity = src.Quantity;
+            sdate = src.SDate;
+            done = (src.Done) ? 1 : 0;
+            weight = src.Weight;
+            wunit = src.WUnit.ToLower();
+            user_id = src.user_id;
+            stype_id = src.SType.Id;
+            sunit_id = src.SUnit.Id;
         }
     }
 }

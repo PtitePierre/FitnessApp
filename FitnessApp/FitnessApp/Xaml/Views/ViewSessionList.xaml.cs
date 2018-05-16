@@ -33,7 +33,7 @@ namespace FitnessApp
                 DependencyService.Get<IMessage>().longtime("list of sessions is null");
 
             lis_sessions.ItemsSource = sessions;
-            lis_sessions.ItemSelected += ListItem_Selected;
+            //lis_sessions.ItemSelected += ListItem_Selected;
             lis_sessions.SelectedItem = null;
 
             SetChart();

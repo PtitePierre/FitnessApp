@@ -127,9 +127,10 @@ namespace FitnessApp.Portable
         /// </summary>
         /// <param name="user">user to complete</param>
         /// <returns>completed user</returns>
-        private static async Task<User> GetUser(User user)
+        public static async Task<User> GetUser(string user_name)
         {
-            string url = "http://psotty.pythonanywhere.com/users/" + user.Name;
+            User user;
+            string url = "http://psotty.pythonanywhere.com/users/" + user_name;
             string request = "";
             restClient = new HttpClient();
             try
@@ -243,7 +244,7 @@ namespace FitnessApp.Portable
                 // send the serialized user to the web service
                 user.Saved = await Send("http://psotty.pythonanywhere.com/users", jsonUser);
                 if (user.Saved)
-                    user = await GetUser(user);
+                    user = await GetUser(user.Name);
                 else
                     DependencyService.Get<IMessage>().longtime("User not saved on WS");
 

@@ -95,6 +95,7 @@ namespace FitnessApp
             {
                 DependencyService.Get<IMessage>().longtime("Incomplete information");
             }
+            SaveAndLoad.LoadSessions(true);
         }
 
         private void Button_Cancel(object sender, EventArgs e)

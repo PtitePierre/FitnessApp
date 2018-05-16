@@ -133,20 +133,21 @@ namespace FitnessApp.Portable
         }
 
         /// <summary>
-        /// 
+        /// load the user corresponding to user_name
+        /// return it
         /// </summary>
-        /// <returns></returns>
-        public async static Task<User> LoadUser()
+        /// <returns>loaded user</returns>
+        public async static Task<User> LoadUser(string user_name, string pwd)
         {
             if (user == null)
             {
+                user = new User();
+                user.Name = user_name;
+                user.Password = pwd;
+
                 try
                 {
-                    IFileSystem fileSystem = FileSystem.Current;
-                    IFolder folder = fileSystem.LocalStorage;
-                    IFile file = await folder.CreateFileAsync(userFile, CreationCollisionOption.OpenIfExists);
-
-                    user = JsonConvert.DeserializeObject<User>(await file.ReadAllTextAsync());
+                    user = await WSConsumer.GetUser(user_name);
                 }
                 catch (Exception e)
                 {
@@ -154,6 +155,15 @@ namespace FitnessApp.Portable
                 }
             }
 
+            return user;
+        }
+
+        /// <summary>
+        /// return the current user of the app if loaded
+        /// </summary>
+        /// <returns>user instance</returns>
+        public static User GetUser()
+        {
             return user;
         }
         #endregion

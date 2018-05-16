@@ -20,10 +20,14 @@ namespace FitnessApp
             CheckUser();
 		}
 
-        private async void CheckUser()
+        /// <summary>
+        /// Check if there is a user loaded in SavaAndLoad
+        /// Display the corresponding Page.Content
+        /// </summary>
+        private void CheckUser()
         {
             // read user.json
-            user = await SaveAndLoad.LoadUser();
+            user = SaveAndLoad.GetUser();
 
             bool hasUser = (user!=null);
 
@@ -41,6 +45,11 @@ namespace FitnessApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Logout(object sender, EventArgs e)
         {
             user = null;
@@ -49,6 +58,12 @@ namespace FitnessApp
             user_newORloggin.IsVisible = true;
         }
 
+        /// <summary>
+        /// create a new user from the form
+        /// change the Visible Page.Content
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_NewUser(object sender,EventArgs e)
         {
             user = new User();
@@ -62,9 +77,17 @@ namespace FitnessApp
             user_newORloggin.IsVisible = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Loggin(object sender, EventArgs e)
         {
-
+            SaveAndLoad.LoadUser(in_userLoggin.Text, in_pwdloggin.Text);
+            user_logged.IsVisible = false;
+            user_newORloggin.IsVisible = true;
+            CheckUser();
         }
 	}
 }
