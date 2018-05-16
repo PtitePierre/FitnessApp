@@ -10,9 +10,18 @@
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <forms:ChartView x:Name="cha_sports"  
+            <Label Text="Global repartition on day :"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" />
+            <forms:ChartView x:Name="cha_dayrepart"  
                                HeightRequest="150"/>
-            
+
+            <Label Text="Global repartition on week :"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" />
+            <forms:ChartView x:Name="cha_weekrepart"  
+                               HeightRequest="150"/>
+
             <!-- 
             favorite moments to practice
             favorite sports

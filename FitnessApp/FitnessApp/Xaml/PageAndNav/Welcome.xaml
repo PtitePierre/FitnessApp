@@ -22,7 +22,6 @@
                 <Button x:Name="btn_Logout"
                         Text="Logout"
                         Clicked="Button_Logout"
-                        IsEnabled="False"
                         HorizontalOptions="Center"/>
                 </StackLayout>
             </StackLayout>

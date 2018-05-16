@@ -20,14 +20,13 @@ namespace FitnessApp.Portable
         /// <returns>list of Unit</returns>
         public async static Task<List<Unit>> GetUnits()
         {
+            DependencyService.Get<IMessage>().shorttime("Loading Units");
             List<Unit> units = new List<Unit>();
             try
             {
                 // Get the json data from the web service
                 // deserialize the data into units
                 units = await GetList<Unit>("http://psotty.pythonanywhere.com/units");
-                
-                DependencyService.Get<IMessage>().shorttime("Units loaded from Web Service");
             }
             catch(Exception e)
             {
@@ -43,13 +42,12 @@ namespace FitnessApp.Portable
         /// <returns>list of SportType</returns>
         public async static Task<List<SportType>> GetSports()
         {
+            DependencyService.Get<IMessage>().shorttime("Loading Sports");
             List<SportType> sports = new List<SportType>();
             try
             {
                 // Get the deserialized data into sports list from the web service
                 sports = await GetList<SportType>("http://psotty.pythonanywhere.com/sports");
-
-                DependencyService.Get<IMessage>().shorttime("Sports loaded from Web Service");
             }
             catch (Exception e)
             {
@@ -65,6 +63,7 @@ namespace FitnessApp.Portable
         /// <param name="user_name">user identifier</param>
         public static async Task<List<Session>> GetSessions(int user_id)
         {
+            DependencyService.Get<IMessage>().shorttime("Loading Sessions");
             string url = "http://psotty.pythonanywhere.com/sessions/" + user_id;
             List<Session> sessions = new List<Session>();
             try
@@ -73,8 +72,6 @@ namespace FitnessApp.Portable
                 sessions = await GetList<Session>(url);
 
                 foreach(Session s in sessions){s.Saved = true;}
-
-                DependencyService.Get<IMessage>().shorttime("Sessions loaded from Web Service");
             }
             catch (Exception e)
             {
@@ -166,7 +163,7 @@ namespace FitnessApp.Portable
                 await Send(url, jsonUnit);
                 // get the new list
                 units = await GetList<Unit>(url);
-                                
+                
                 DependencyService.Get<IMessage>().shorttime("Unit added to the Web Service");
             }
             catch (Exception e)
@@ -222,7 +219,7 @@ namespace FitnessApp.Portable
                 // get the new list
                 sessions = await GetSessions(user_id);
 
-                DependencyService.Get<IMessage>().longtime(jsonSession);
+                DependencyService.Get<IMessage>().shorttime("Session added to the Web Service");
             }
             catch (Exception e)
             {
@@ -279,7 +276,7 @@ namespace FitnessApp.Portable
                 var answer = await restClient.PostAsync(url, content);
                 var result = answer.Content;
                 // get the result : new json representation of corresponding list
-                DependencyService.Get<IMessage>().longtime("save : " + result.ToString());
+                //DependencyService.Get<IMessage>().longtime("save : " + result.ToString());
             }
             catch (Exception e)
             {

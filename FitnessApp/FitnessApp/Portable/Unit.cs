@@ -27,19 +27,19 @@ namespace FitnessApp.Portable
             switch (Code)
             {
                 case "it":
-                    coef = 0.02f;
+                    coef = 0.01f;
                     break;
                 case "h":
-                    coef = 3;
+                    coef = 6;
                     break;
                 case "min":
-                    coef = 0.3f;
+                    coef = 0.1f;
                     break;
                 case "sec":
-                    coef = 0.2f;
+                    coef = 0.01f;
                     break;
                 case "m":
-                    coef = 0.2f;
+                    coef = 0.01f;
                     break;
                 case "km":
                 default:

@@ -56,6 +56,20 @@ namespace FitnessApp.Portable
             return str;
         }
 
+        public Unit GetUnit()
+        {
+            if (SUnit == null)
+                SUnit = SaveAndLoad.GetUnit(sunit_id);
+            return SUnit;
+        }
+
+        public SportType GetSportType()
+        {
+            if (SType == null)
+                SType = SaveAndLoad.GetSport(stype_id);
+            return SType;
+        }
+
         public string ToStringClassic()
         {
             if (SUnit == null)
@@ -91,7 +105,7 @@ namespace FitnessApp.Portable
                 return -1;
 
             if(DateTime.Compare(this.SDate, compareSession.SDate) == 0)
-                return String.Compare(this.SType.Name, compareSession.SType.Name);
+                return String.Compare(this.GetSportType().Name, compareSession.GetSportType().Name);
             else
                 return DateTime.Compare(this.SDate, compareSession.SDate);
         }

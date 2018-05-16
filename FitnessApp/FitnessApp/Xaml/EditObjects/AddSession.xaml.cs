@@ -137,7 +137,7 @@ namespace FitnessApp
                         List<Session> newSessions = new List<Session>();
                         foreach (Session ss in sessions)
                         {
-                            if (ss.SType.Id == sport.Id)
+                            if (ss.GetSportType().Id == sport.Id)
                                 newSessions.Add(ss);
                         }
                         if (newSessions != null)

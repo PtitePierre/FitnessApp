@@ -25,6 +25,9 @@ namespace FitnessApp
             FillListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private async void FillListView()
         {
             sessions = await SaveAndLoad.LoadSessions();
@@ -39,6 +42,11 @@ namespace FitnessApp
             SetChart();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListItem_Selected(object sender, EventArgs e)
         {
             try
@@ -68,10 +76,10 @@ namespace FitnessApp
 
                 foreach (Session session in sessions)
                 {
-                    if (sports.ContainsKey(session.SType.Name))
-                        sports[session.SType.Name]++;
+                    if (sports.ContainsKey(session.GetSportType().Name))
+                        sports[session.GetSportType().Name]++;
                     else
-                        sports.Add(session.SType.Name, 1);
+                        sports.Add(session.GetSportType().Name, 1);
                 }
 
                 int num = 0;

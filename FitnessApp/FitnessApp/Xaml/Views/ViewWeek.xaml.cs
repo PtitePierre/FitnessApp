@@ -47,12 +47,17 @@ namespace FitnessApp
             }
 
             lis_sessions.ItemsSource = weekSessions;
-            FillChart(weekSessions);
+            FillChart(weekSessions, day);
         }
 
-        private void FillChart(List<Session> sessions)
+        private void FillChart(List<Session> sessions, DateTime day)
         {
             Dictionary<string, float> week = new Dictionary<string, float>();
+            foreach(DateTime dt in GetWeek(day))
+            {
+                week.Add(dt.ToShortDateString(), 0);
+            }
+            
             foreach (Session s in sessions)
             {
                 float coef = s.GetUnitCoef();
@@ -109,6 +114,45 @@ namespace FitnessApp
 
             // Return the week of our adjusted day
             return cal.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
+
+        public static List<DateTime> GetWeek(DateTime time)
+        {
+            DateTime monday, day;
+            List<DateTime> week = new List<DateTime>();
+
+            DayOfWeek dow = cal.GetDayOfWeek(time);
+            switch (dow)
+            {
+                case DayOfWeek.Monday:monday = time;
+                    break;
+                case DayOfWeek.Tuesday:monday = time.AddDays(-1);
+                    break;
+                case DayOfWeek.Wednesday:
+                    monday = time.AddDays(-2);
+                    break;
+                case DayOfWeek.Thursday:
+                    monday = time.AddDays(-3);
+                    break;
+                case DayOfWeek.Friday:
+                    monday = time.AddDays(-4);
+                    break;
+                case DayOfWeek.Saturday:
+                    monday = time.AddDays(-5);
+                    break;
+                default:
+                    monday = time.AddDays(-6);
+                    break;
+            }
+            day = monday;
+
+            do
+            {
+                week.Add(day);
+                day = day.AddDays(1);
+            } while (cal.GetDayOfWeek(day) != DayOfWeek.Monday);
+
+            return week;
         }
     }
 }

@@ -35,6 +35,8 @@ namespace FitnessApp
 
         private void AddSportClicked(object sender, EventArgs e)
         {
+            Application.Current.MainPage = new NavigationPage(new AddSport(Application.Current.MainPage));
+            /*
             if (lis_sports.SelectedItem != null)
             {
                 SportType sport = (SportType)lis_sports.SelectedItem;
@@ -45,11 +47,14 @@ namespace FitnessApp
             {
                 Application.Current.MainPage = new NavigationPage(new AddSport(Application.Current.MainPage));
             }
+            */
         }
 
         private void AddUnitClicked(object sender, EventArgs e)
         {
-            if(lis_units.SelectedItem != null)
+            Application.Current.MainPage = new NavigationPage(new AddUnit(Application.Current.MainPage));
+            /*
+            if (lis_units.SelectedItem != null)
             {
                 Unit unit = (Unit)lis_units.SelectedItem;
                 lis_units.SelectedItem = null;
@@ -59,6 +64,7 @@ namespace FitnessApp
             {
                 Application.Current.MainPage = new NavigationPage(new AddUnit(Application.Current.MainPage));
             }
+            */
         }
     }
 }
