@@ -117,7 +117,8 @@ namespace FitnessApp.Portable
             if (SType == null)
                 SType = SaveAndLoad.GetSport(stype_id);
 
-            return SUnit.GetCoef();
+
+            return SUnit.GetCoef()*(1+Weight/10);
         }
     }
 

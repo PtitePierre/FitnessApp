@@ -94,14 +94,14 @@ namespace FitnessApp
 
         private void Button_NextWeek(object sender, EventArgs e)
         {
-            DependencyService.Get<IMessage>().shorttime("Next Week");
+            //DependencyService.Get<IMessage>().shorttime("Next Week");
             day = day.AddDays(7);
             FillList(day);
         }
 
         private void Button_PrevWeek(object sender, EventArgs e)
         {
-            DependencyService.Get<IMessage>().shorttime("Prev Week");
+            //DependencyService.Get<IMessage>().shorttime("Prev Week");
             day = day.AddDays(-7);
             FillList(day);
         }

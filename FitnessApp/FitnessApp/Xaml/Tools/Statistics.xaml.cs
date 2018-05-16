@@ -101,9 +101,9 @@ namespace FitnessApp
             foreach (Session session in sessions)
             {
                 if (repart.ContainsKey(session.GetSportType().Name))
-                    repart[session.GetSportType().Name]++;
+                    repart[session.GetSportType().Name] += session.Quantity * session.GetUnitCoef();
                 else
-                    repart.Add(session.GetSportType().Name, 1);
+                    repart.Add(session.GetSportType().Name, session.Quantity * session.GetUnitCoef());
             }
 
             List<Entry> entries = CreateEntries(repart);

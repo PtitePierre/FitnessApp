@@ -17,7 +17,6 @@
                     <local:MasterPageItem Title="Units and Sports" IconSource="" TargetType="{x:Type local:ViewListJson}" />
                     <local:MasterPageItem Title="Timer Tools" IconSource="" TargetType="{x:Type local:TimerTool}" />
                     <local:MasterPageItem Title="Chronometer" IconSource="" TargetType="{x:Type local:Chronometer}" />
-                    <local:MasterPageItem Title="GPS Tracker" IconSource="" TargetType="{x:Type local:GpsTracker}" />
                     <local:MasterPageItem Title="More" IconSource="" TargetType="{x:Type local:More}" />
 
                 </x:Array>
