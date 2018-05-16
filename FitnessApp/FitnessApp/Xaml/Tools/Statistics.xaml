@@ -22,6 +22,12 @@
             <forms:ChartView x:Name="cha_weekrepart"  
                                HeightRequest="150"/>
 
+            <Label Text="Favorite sports :"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" />
+            <forms:ChartView x:Name="cha_favsport"  
+                               HeightRequest="150"/>
+
             <!-- 
             favorite moments to practice
             favorite sports

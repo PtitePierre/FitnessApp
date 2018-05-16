@@ -31,6 +31,7 @@ namespace FitnessApp
             sessions = await SaveAndLoad.LoadSessions();
             SetChartDayRepart();
             SetChartWeekRepart();
+            SetChartFavSport();
         }
 
         public void SetChartDayRepart()
@@ -93,19 +94,36 @@ namespace FitnessApp
             }
         }
 
+        public void SetChartFavSport()
+        {
+            Dictionary<string, float> repart = new Dictionary<string, float>();
+
+            foreach (Session session in sessions)
+            {
+                if (repart.ContainsKey(session.GetSportType().Name))
+                    repart[session.GetSportType().Name]++;
+                else
+                    repart.Add(session.GetSportType().Name, 1);
+            }
+
+            List<Entry> entries = CreateEntries(repart);
+            cha_favsport.Chart = new RadialGaugeChart() { Entries = entries };
+
+        }
+
         public List<Entry> CreateEntries(Dictionary<string, float> src)
         {
             List<Entry> entries = new List<Entry>();
+            int ind = 0;
             foreach (var time in src)
             {
+                ind++;
                 // set a new color
-                string hex;
-
-                int red = (int)(127 - (time.Value % 7 + 1) * 18);
+                int red = (int)(127 - ((time.Value + ind) % 7 + 1) * 18);
                 int green = (int) ((time.Value % 7 + 1) * 30);
                 int blue = (int)(127 + (time.Value % 7 + 1) * 18);
 
-                hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
+                string hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
                 
                 entries.Add(
                     new Entry(time.Value)
@@ -124,14 +142,13 @@ namespace FitnessApp
             foreach (var time in src)
             {
                 // set a new color
-                string hex;
                 int key = (int)time.Key;
 
                 int red = (int)(127 - (key % 7) * 18);
                 int green = (int)((key % 7) * 30);
                 int blue = (int)(127 + (key % 7) * 18);
 
-                hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
+                string hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
 
                 entries.Add(
                     new Entry(time.Value)
