@@ -22,8 +22,6 @@ namespace FitnessApp.Droid
     {
         public Audio_Droid() { }
 
-        private MediaPlayer _mediaPlayer;
-
         public bool PlayAlarm()
         {
             Android.Net.Uri notification = RingtoneManager.GetDefaultUri(RingtoneType.Notification);

@@ -16,7 +16,6 @@ namespace FitnessApp
         private bool run;
         private TimeSpan total;
         private DateTime start;
-        private DateTime pause;
         private Stopwatch sw;
 
         public Chronometer ()

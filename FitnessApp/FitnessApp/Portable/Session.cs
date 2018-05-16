@@ -1,17 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FitnessApp.Portable
 {
-    
-    public enum weight_unit
-    {
-        kg,
-        g,
-        lb
-    }
-
     public class Session
     {
         public int Id { get; set; }
@@ -21,38 +14,75 @@ namespace FitnessApp.Portable
         public SportType SType { get; set; }
         public bool Done { get; set; }
         public float Weight { get; set; }
-        public weight_unit WUnit { get; set; }
+        public string WUnit { get; set; }
         public bool Saved { get; set; }
+        public int user_id { get; set; }
+        public int stype_id { get; set; }
+        public int sunit_id { get; set; }
 
         public Session()
         {
             // default
             Weight = 0;
-            WUnit = weight_unit.kg;
+            WUnit = "kg";
             Saved = false;
+            user_id = SaveAndLoad.LoadUser().Id;
+
+            if(SUnit == null)
+                SUnit = SaveAndLoad.GetUnit(sunit_id);
+            if(SType == null)
+                SType = SaveAndLoad.GetSport(stype_id);
         }
-        
+
         override
         public string ToString()
         {
             string str;
-            if (Done)
+            if (SDate > DateTime.Now)
             {
                 str = ToStringClassic();
             }
             else
             {
-                //StringFormat = '{0:MMMM dd, yyyy}'  "DD HH:mm"
+                if (SUnit == null)
+                    SUnit = SaveAndLoad.GetUnit(sunit_id);
+                if (SType == null)
+                    SType = SaveAndLoad.GetSport(stype_id);
+
                 string format = @"dd\d\ hh\:mm\:ss";
                 string countdown = (SDate - DateTime.Now).ToString(format);
-                str = SType.Name + " : " + Quantity + " " + SUnit.Code + "  " + countdown;
+                str = ToStringClassic() + " : " + countdown;
             }
             return str;
         }
 
         public string ToStringClassic()
         {
-            return SType.Name + " : " + Quantity + " " + SUnit.Code + "  " + SDate;
+            if (SUnit == null)
+                SUnit = SaveAndLoad.GetUnit(sunit_id);
+            if (SType == null)
+                SType = SaveAndLoad.GetSport(stype_id);
+            return SType.Name + " : " + Quantity + " " + SUnit.Code + "  " + SDate.ToShortDateString();
+        }
+
+        public string ToJson()
+        {
+            if (SUnit == null)
+                SUnit = SaveAndLoad.GetUnit(sunit_id);
+            if (SType == null)
+                SType = SaveAndLoad.GetSport(stype_id);
+
+            string json = "{\"stype_id\":"+ SType.Id
+                +",\"sunit_id\":"+ SUnit.Id
+                +",\"user_id\":"+ user_id
+                +",\"sdate\":"+ JsonConvert.SerializeObject(SDate)
+                +",\"quantity\":"+ Quantity
+                +",\"weight\":"+ Weight
+                +",\"wunit\":"+ WUnit
+                +",\"done\":"+ Done +"}";
+
+
+            return json;
         }
 
         /// <summary>
@@ -72,6 +102,16 @@ namespace FitnessApp.Portable
                 return String.Compare(this.SType.Name, compareSession.SType.Name);
             else
                 return DateTime.Compare(this.SDate, compareSession.SDate);
+        }
+
+        public float GetUnitCoef()
+        {
+            if (SUnit == null)
+                SUnit = SaveAndLoad.GetUnit(sunit_id);
+            if (SType == null)
+                SType = SaveAndLoad.GetSport(stype_id);
+
+            return SUnit.GetCoef();
         }
     }
 }

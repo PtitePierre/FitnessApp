@@ -68,7 +68,7 @@
                        Keyboard="Numeric" 
                        HorizontalOptions="EndAndExpand"
                        WidthRequest="192" />
-                    <Picker x:Name="pic_weightUnit"
+                <Picker x:Name="pic_weightUnit"
                        HorizontalOptions="EndAndExpand"
                        WidthRequest="64"/>
             </StackLayout>

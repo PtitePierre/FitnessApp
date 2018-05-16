@@ -14,6 +14,7 @@ namespace FitnessApp
 	public partial class AddSession : ContentPage
 	{
         private static bool done = false;
+        private static string[] wunits = { "kg", "g", "lbs" };
         private Session session, oldS;
         private Page Page;
         private bool edit;
@@ -23,6 +24,7 @@ namespace FitnessApp
             Page = page;
             InitializeComponent();
             FillPickers(old);
+            pic_weightUnit.ItemsSource = wunits;
 
             //CheckOld(old);
         }
@@ -30,9 +32,9 @@ namespace FitnessApp
         private async void FillPickers(Session old)
         {
             List<Unit> units = await SaveAndLoad.LoadUnits();
-            List<SportType> sports = await SaveAndLoad.LoadSports();
-
             pic_unit.ItemsSource = units;
+
+            List<SportType> sports = await SaveAndLoad.LoadSports();
             pic_sportType.ItemsSource = sports;
 
             CheckOld(old);

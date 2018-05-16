@@ -55,7 +55,7 @@ namespace FitnessApp
             Dictionary<string, float> week = new Dictionary<string, float>();
             foreach (Session s in sessions)
             {
-                float coef = s.SUnit.GetCoef();
+                float coef = s.GetUnitCoef();
                 if (week.ContainsKey(s.SDate.ToShortDateString()))
                     week[s.SDate.ToShortDateString()] += s.Quantity*coef;
                 else

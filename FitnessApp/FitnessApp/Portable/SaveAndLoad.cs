@@ -85,7 +85,28 @@ namespace FitnessApp.Portable
         /// <returns>Sessions: list of Session</returns>
         public async static Task<List<Session>> LoadSessions(bool forced = false)
         {
-            Sessions = Sessions ?? await LoadList("session.json", Sessions);
+            if (SportTypes == null)
+                await LoadSports();
+            if (Units == null)
+                await LoadUnits();
+
+            try
+            {
+                if (forced)
+                {
+                    Sessions = await WSConsumer.GetSessions(user.Id);
+                }
+                else
+                {
+                    Sessions = Sessions ?? await WSConsumer.GetSessions(user.Id);
+                }
+            }
+            catch (Exception e)
+            {
+                DependencyService.Get<IMessage>().longtime("ERR: " + e.Message);
+                Sessions = Sessions ?? await LoadList("session.json", Sessions);
+            }
+
             Sessions.Sort((x, y) => x.CompareTo(y));
             return Sessions;
         }
@@ -139,8 +160,9 @@ namespace FitnessApp.Portable
 
         #region Saving part
         /// <summary>
-        /// Add a new unit to the webservice and reload ws sports list
-        /// Or Add it to the local units list and save it localy
+        /// Add a new unit to the webservice and reload ws units list
+        /// Or Add it to the local units list
+        /// save the list localy
         /// </summary>
         /// <param name="unit">new unit to add in Units</param>
         public async static void SaveUnit(Unit unit)
@@ -164,15 +186,16 @@ namespace FitnessApp.Portable
         }
 
         /// <summary>
-        /// Add a new sportType to the webservice and reload ws units list
-        /// Or Add it to the local sportType list and save it localy
+        /// Add a new sportType to the webservice and reload ws sports list
+        /// Or Add it to the local sportType list
+        /// save the list localy
         /// </summary>
         /// <param name="sport">new sportType to add in SportTypes</param>
         public static async void SaveSport(SportType sport)
         {
             try
             {
-                if (Units == null)
+                if (SportTypes == null)
                     await LoadSports();
 
                 SportTypes = await WSConsumer.AddSport(sport);
@@ -195,18 +218,22 @@ namespace FitnessApp.Portable
         /// <param name="session">new session to add</param>
         public async static void SaveSession(Session session)
         {
-            if (Sessions == null)
-                Sessions = new List<Session>();
-
             try
             {
-                Sessions.Add(session);
-                session.Saved = await SaveList(Sessions, sessionFile);
+                if (Sessions == null)
+                    Sessions = new List<Session>();
+
+                Sessions = await WSConsumer.AddSession(session, user.Id);
             }
             catch(Exception e)
             {
-                DependencyService.Get<IMessage>().longtime(e.Message);
+                DependencyService.Get<IMessage>().longtime("ERR: " + e.Message);
+                if (Sessions == null)
+                    Sessions = new List<Session>();
+
+                Sessions.Add(session);
             }
+            SaveList(Sessions, sessionFile);
         }
 
         /// <summary>
@@ -266,18 +293,46 @@ namespace FitnessApp.Portable
         {
             try
             {
-                user = newUser;
-                IFileSystem fileSystem = FileSystem.Current;
-                IFolder folder = fileSystem.LocalStorage;
-                IFile file = await folder.CreateFileAsync(userFile, CreationCollisionOption.OpenIfExists);
+                user = await WSConsumer.SaveUser(newUser);
 
-                await file.WriteAllTextAsync(JsonConvert.SerializeObject(user));
+                try
+                {
+                    IFileSystem fileSystem = FileSystem.Current;
+                    IFolder folder = fileSystem.LocalStorage;
+                    IFile file = await folder.CreateFileAsync(userFile, CreationCollisionOption.OpenIfExists);
+
+                    await file.WriteAllTextAsync(JsonConvert.SerializeObject(user));
+                }
+                catch (Exception e2)
+                {
+                    DependencyService.Get<IMessage>().shorttime("ERROR : " + e2.Message);
+                }
             }
             catch (Exception e)
             {
-                DependencyService.Get<IMessage>().longtime(e.Message);
+                DependencyService.Get<IMessage>().shorttime(e.Message);
             }
         }
         #endregion
+
+        public static Unit GetUnit(int id)
+        {
+            foreach(Unit u in Units)
+            {
+                if (u.Id == id)
+                    return u;
+            }
+            return null;
+        }
+
+        public static SportType GetSport(int id)
+        {
+            foreach(SportType s in SportTypes)
+            {
+                if (s.Id == id)
+                    return s;
+            }
+            return null;
+        }
     }
 }
