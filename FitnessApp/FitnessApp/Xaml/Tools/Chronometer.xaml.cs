@@ -87,7 +87,8 @@ namespace FitnessApp
 
         private void Button_NewSession(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NavigationPage(new AddSession(Application.Current.MainPage, null, total.TotalSeconds.ToString()));
+            if(!run)
+                Application.Current.MainPage = new NavigationPage(new AddSession(Application.Current.MainPage, null, total.TotalSeconds.ToString()));
         }
     }
 }
