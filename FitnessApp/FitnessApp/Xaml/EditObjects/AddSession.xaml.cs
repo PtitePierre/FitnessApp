@@ -19,12 +19,17 @@ namespace FitnessApp
         private Page Page;
         private bool edit;
 
-        public AddSession (Page page, Session old = null)
+        public AddSession (Page page, Session old = null, string secondes = null)
         {
             Page = page;
             InitializeComponent();
+
             FillPickers(old);
             pic_weightUnit.ItemsSource = wunits;
+            if (secondes != null)
+            {
+                in_quantity.Text = secondes;
+            }
 
             CheckOld(old);
 

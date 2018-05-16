@@ -33,6 +33,13 @@
                 <Button x:Name="btn_startTimer"
                     Text="Start"
                     Clicked="Button_StartTimer"/>
+
+                <Button x:Name="btn_newSession"
+                    Text="Save in Session"
+                    BackgroundColor="#03AB17"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand"
+                    Clicked="Button_NewSession"/>
             </StackLayout>
         </StackLayout>        
     </ContentPage.Content>

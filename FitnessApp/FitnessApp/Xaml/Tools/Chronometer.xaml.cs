@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microcharts;
+using SkiaSharp;
+using Microcharts.Forms;
+using Entry = Microcharts.Entry;
 
 namespace FitnessApp
 {
@@ -79,6 +83,11 @@ namespace FitnessApp
         private void UpdateLabel(TimeSpan span)
         {
             lab_chrono.Text = span.ToString(@"hh\:mm\:ss\.ff");
+        }
+
+        private void Button_NewSession(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new AddSession(Application.Current.MainPage, null, total.TotalSeconds.ToString()));
         }
     }
 }

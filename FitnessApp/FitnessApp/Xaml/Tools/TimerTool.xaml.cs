@@ -24,6 +24,7 @@ namespace FitnessApp
 		{
 			InitializeComponent ();
             timer_run = false;
+            btn_newSession.IsEnabled = false;
         }
 
         private void Button_StartTimer(object sender, EventArgs e)
@@ -52,6 +53,7 @@ namespace FitnessApp
                         if (nb == max)
                         {
                             timer_run = false;
+                            btn_newSession.IsEnabled = true;
                         }
 
                         return (timer_run); // True = Repeat again, False = Stop the timer
@@ -90,5 +92,11 @@ namespace FitnessApp
             c.LabelTextSize = 0;
             cha_chrono.Chart = c;
         }
-	}
+
+        private void Button_NewSession(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new AddSession(Application.Current.MainPage, null, in_timerSpan.Text));
+        }
+
+    }
 }
