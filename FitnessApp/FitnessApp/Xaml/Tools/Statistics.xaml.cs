@@ -38,11 +38,13 @@ namespace FitnessApp
             Dictionary<string, float> repart = new Dictionary<string, float>();
             for(int i=0; i<6; i++)
             {
-                string label = (i * 4).ToString() + ":00-" + ((i + 1) * 4).ToString() + ":00";
+                int min = (i * 4);
+                int max = ((i + 1) * 4);
+                string label = min.ToString() + ":00-" + max.ToString() + ":00";
                 repart.Add(label, 0);
                 foreach (Session s in sessions)
                 {
-                    if(s.SDate.TimeOfDay< TimeSpan.FromHours((i + 1) * 4))
+                    if(s.SDate.TimeOfDay >= TimeSpan.FromHours(min) && s.SDate.TimeOfDay < TimeSpan.FromHours(max))
                     {
                         repart[label] += s.Quantity * s.GetUnitCoef();
                     }
@@ -57,24 +59,24 @@ namespace FitnessApp
         {
             Calendar cal = CultureInfo.InvariantCulture.Calendar;
             DateTime day = DateTime.Now;
-            List<string> w = new List<string>();
+            List<DayOfWeek> w = new List<DayOfWeek>();
             
             DayOfWeek dow = cal.GetDayOfWeek(day);
             do
             {
-                w.Add(cal.GetDayOfWeek(day).ToString());
+                w.Add(cal.GetDayOfWeek(day));
                 day = day.AddDays(1);
             } while (cal.GetDayOfWeek(day) != dow);
 
-            Dictionary<string, float> week = new Dictionary<string, float>();
+            Dictionary<DayOfWeek, float> week = new Dictionary<DayOfWeek, float>();
             try
             {
-                foreach (string d in w)
+                foreach (DayOfWeek d in w)
                 {
                     float activity = 0;
                     foreach (Session s in sessions)
                     {
-                        if (cal.GetDayOfWeek(s.SDate).ToString() == d)
+                        if (cal.GetDayOfWeek(s.SDate) == d)
                         {
                             activity += s.Quantity * s.GetUnitCoef();
                         }
@@ -82,8 +84,8 @@ namespace FitnessApp
                     week.Add(d, activity);
                 }
 
-                List<Entry> entries = CreateEntries(week);
-                cha_weekrepart.Chart = new LineChart() { Entries = entries };
+                List<Entry> entries = CreateWEntries(week);
+                cha_weekrepart.Chart = new DonutChart() { Entries = entries };
             }
             catch(Exception e)
             {
@@ -99,17 +101,42 @@ namespace FitnessApp
                 // set a new color
                 string hex;
 
-                int red = (int)(255 - (time.Value % 7 + 1) * 30);
-                int green = (int)((time.Value % 7 + 1) * 30);
-                int blue = (int)(255 - (time.Value % 7 + 1) * 30);
+                int red = (int)(127 - (time.Value % 7 + 1) * 18);
+                int green = (int) ((time.Value % 7 + 1) * 30);
+                int blue = (int)(127 + (time.Value % 7 + 1) * 18);
 
                 hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
-
-                // add the pair sport name and its number of occurences
+                
                 entries.Add(
                     new Entry(time.Value)
                     {
                         Label = time.Key,
+                        ValueLabel = time.Value.ToString(),
+                        Color = SKColor.Parse(hex)
+                    });
+            }
+            return entries;
+        }
+
+        public List<Entry> CreateWEntries(Dictionary<DayOfWeek, float> src)
+        {
+            List<Entry> entries = new List<Entry>();
+            foreach (var time in src)
+            {
+                // set a new color
+                string hex;
+                int key = (int)time.Key;
+
+                int red = (int)(127 - (key % 7) * 18);
+                int green = (int)((key % 7) * 30);
+                int blue = (int)(127 + (key % 7) * 18);
+
+                hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
+
+                entries.Add(
+                    new Entry(time.Value)
+                    {
+                        Label = time.Key.ToString(),
                         ValueLabel = time.Value.ToString(),
                         Color = SKColor.Parse(hex)
                     });

@@ -53,6 +53,7 @@ namespace FitnessApp
         private void Button_Logout(object sender, EventArgs e)
         {
             user = null;
+            SaveAndLoad.Logout();
 
             user_logged.IsVisible = false;
             user_newORloggin.IsVisible = true;

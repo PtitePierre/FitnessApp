@@ -344,5 +344,11 @@ namespace FitnessApp.Portable
             }
             return null;
         }
+
+        public static void Logout()
+        {
+            user = null;
+            Sessions = null;
+        }
     }
 }

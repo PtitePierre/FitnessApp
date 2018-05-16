@@ -26,7 +26,9 @@ namespace FitnessApp
             FillPickers(old);
             pic_weightUnit.ItemsSource = wunits;
 
-            //CheckOld(old);
+            CheckOld(old);
+
+            btn_submit.IsEnabled = !edit;
         }
 
         private async void FillPickers(Session old)
@@ -83,7 +85,7 @@ namespace FitnessApp
                 session.SUnit = (Unit)pic_unit.SelectedItem;
                 session.SDate = pic_date.Date + pic_time.Time;
                 session.Done = done;
-
+                
                 if (edit)
                     SaveAndLoad.UpDateSession(oldS, session);
                 else

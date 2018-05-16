@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace FitnessApp.Portable
 {
@@ -87,6 +88,7 @@ namespace FitnessApp.Portable
                 SType = SaveAndLoad.GetSport(stype_id);
 
             string json = JsonConvert.SerializeObject(new SimpleSession(this));
+            DependencyService.Get<IMessage>().longtime(json);
 
             return json;
         }
@@ -126,7 +128,7 @@ namespace FitnessApp.Portable
     {
         public int id { get; set; }
         public float quantity { get; set; }
-        public DateTime sdate { get; set; }
+        public string sdate { get; set; }
         public int done { get; set; }
         public float weight { get; set; }
         public string wunit { get; set; }
@@ -138,7 +140,8 @@ namespace FitnessApp.Portable
         {
             id = src.Id;
             quantity = src.Quantity;
-            sdate = src.SDate;
+            //sdate = src.SDate.ToString("s") + "Z";
+            sdate = src.SDate.ToString("s");
             done = (src.Done) ? 1 : 0;
             weight = src.Weight;
             wunit = src.WUnit.ToLower();

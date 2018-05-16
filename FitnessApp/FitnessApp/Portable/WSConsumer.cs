@@ -158,7 +158,7 @@ namespace FitnessApp.Portable
             {
                 string url = "http://psotty.pythonanywhere.com/units";
                 // serialize unit in json format
-                string jsonUnit = JsonConvert.SerializeObject(unit);
+                string jsonUnit = JsonConvert.SerializeObject(unit).ToLower();
                 // send the serialized unit to the web service
                 await Send(url, jsonUnit);
                 // get the new list
@@ -185,14 +185,13 @@ namespace FitnessApp.Portable
             {
                 string url = "http://psotty.pythonanywhere.com/sports";
                 // serialize sport in json format
-                string jsonSport = JsonConvert.SerializeObject(sport);
+                string jsonSport = JsonConvert.SerializeObject(sport).ToLower();
                 // send the serialized sport to the web service
                 await Send(url, jsonSport);
 
                 // get the new list
                 sports = await GetList<SportType>(url);
-
-                DependencyService.Get<IMessage>().longtime(jsonSport);
+                DependencyService.Get<IMessage>().shorttime("Sport added to the Web Service");
             }
             catch (Exception e)
             {
@@ -237,7 +236,7 @@ namespace FitnessApp.Portable
             try
             {
                 // serialize user in json format
-                string jsonUser = JsonConvert.SerializeObject(user);
+                string jsonUser = JsonConvert.SerializeObject(user).ToLower();
                 // send the serialized user to the web service
                 user.Saved = await Send("http://psotty.pythonanywhere.com/users", jsonUser);
                 if (user.Saved)
@@ -272,7 +271,7 @@ namespace FitnessApp.Portable
                 restClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/json"));
 
                 // def body
-                var content = new StringContent(jsonObject.ToLower(), Encoding.UTF8, "application/json");
+                var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
                 var answer = await restClient.PostAsync(url, content);
                 var result = answer.Content;
                 // get the result : new json representation of corresponding list
