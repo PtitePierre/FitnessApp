@@ -68,16 +68,16 @@ namespace FitnessApp
             }
             // set chart entries
             List<Entry> entries = new List<Entry>();
+            int ind = 0;
             foreach (var d in week)
             {
+                ind++;
                 // set a new color
-                string hex;
+                int red = (int)(127 - (d.Value % 7 + 1) * 18);
+                int green = (int)(((d.Value + ind) % 7 + 1) * 30);
+                int blue = (int)(127 + (d.Value % 7 + 1) * 18);
 
-                int red = (int)(255 - (d.Value % 7 + 1) * 30);
-                int green = (int)((d.Value % 7 + 1) * 30);
-                int blue = (int)(255 - (d.Value % 7 + 1) * 30);
-
-                hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
+                string hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
 
                 // add the pair sport name and its number of occurences
                 entries.Add(

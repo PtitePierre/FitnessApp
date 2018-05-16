@@ -87,8 +87,8 @@ namespace FitnessApp
                 foreach (var sport in sports)
                 {
                     // set a new color
-                    int red = (int)(127 - ((sport.Value + num) % 7 + 1) * 18);
-                    int green = (int)((sport.Value % 7 + 1) * 30);
+                    int red = (int)(127 - (sport.Value % 7 + 1) * 18);
+                    int green = (int)(((sport.Value + num) % 7 + 1) * 30);
                     int blue = (int)(127 + (sport.Value % 7 + 1) * 18);
 
                     string hex = String.Format("#{0:X2}{1:X2}{2:X2}", red, green, blue);
