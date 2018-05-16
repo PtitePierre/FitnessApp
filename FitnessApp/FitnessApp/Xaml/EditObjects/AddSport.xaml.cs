@@ -25,10 +25,10 @@ namespace FitnessApp
             {
                 in_Name.Text = sport.Name;
                 units_id = sport.Units;
+                btn_Submit.IsEnabled = false;
             }
             else
             {
-                DependencyService.Get<IMessage>().shorttime("no sport parameter");
                 units_id = new List<int>();
             }
             FillListViews();
@@ -71,12 +71,6 @@ namespace FitnessApp
                 newSport.Units = units_id;
 
                 SaveAndLoad.SaveSport(newSport);
-
-                in_Name.Text = null;
-                units_id.RemoveRange(0, units_id.Count);
-                FillListViews();
-
-                DependencyService.Get<IMessage>().shorttime("New sport type saved");
             }
             Application.Current.MainPage = Page;
         }
@@ -94,10 +88,6 @@ namespace FitnessApp
                 btn.BackgroundColor = Color.FromRgba(220, 220, 220, 230);
                 units_id.Remove(id);
             }
-
-            string txt = "units : ";
-            foreach (int i in units_id) { txt += i + ","; }
-            DependencyService.Get<IMessage>().shorttime(txt);
         }
     }
 }

@@ -274,8 +274,6 @@ namespace FitnessApp.Portable
                 var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
                 var answer = await restClient.PostAsync(url, content);
                 var result = answer.Content;
-                // get the result : new json representation of corresponding list
-                //DependencyService.Get<IMessage>().longtime("save : " + result.ToString());
             }
             catch (Exception e)
             {

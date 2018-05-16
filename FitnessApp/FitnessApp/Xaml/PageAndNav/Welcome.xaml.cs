@@ -74,9 +74,10 @@ namespace FitnessApp
             user.Password = in_pwd.Text;
 
             SaveAndLoad.SaveUser(user);
+            //SaveAndLoad.LoadUser(user.Name, user.Password);
 
-            user_logged.IsVisible = true;
-            user_newORloggin.IsVisible = false;
+            user_logged.IsVisible = false;
+            user_newORloggin.IsVisible = true;
             CheckUser();
         }
 

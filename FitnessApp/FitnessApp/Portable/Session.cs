@@ -88,8 +88,6 @@ namespace FitnessApp.Portable
                 SType = SaveAndLoad.GetSport(stype_id);
 
             string json = JsonConvert.SerializeObject(new SimpleSession(this));
-            DependencyService.Get<IMessage>().longtime(json);
-
             return json;
         }
 

@@ -23,11 +23,12 @@ namespace FitnessApp
             {
                 in_Code.Text = unit.Code;
                 in_Name.Text = unit.Name;
+                btn_Submit.IsEnabled = false;
             }
+            /*
             else
-            {
                 DependencyService.Get<IMessage>().shorttime("no unit parameter");
-            }
+            */
 		}
 
         private void Button_CancelClicked(object sender, EventArgs e)

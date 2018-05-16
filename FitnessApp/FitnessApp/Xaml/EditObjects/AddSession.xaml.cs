@@ -54,6 +54,8 @@ namespace FitnessApp
                 pic_time.Time = old.SDate.TimeOfDay;
                 pic_unit.SelectedItem = old.SUnit;
                 done = old.Done;
+                in_weight.Text = old.Weight.ToString();
+                pic_weightUnit.SelectedItem = old.WUnit;
 
                 this.session = old;
                 this.Title = "Edit a Session";
