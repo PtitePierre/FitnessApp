@@ -203,6 +203,21 @@ namespace FitnessApp
             pic_date.Date = old.SDate;
             pic_time.Time = old.SDate.TimeOfDay;
             pic_unit.SelectedItem = old.SUnit;
+            in_weight.Text = old.Weight.ToString();
+            pic_weightUnit.SelectedItem = old.WUnit;
+        }
+
+        private void Button_AddSport(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new AddSport(Application.Current.MainPage));
+        }
+
+        private void Button_UpDate(object sender, EventArgs e)
+        {
+            FillPickers(oldS);
+            pic_weightUnit.ItemsSource = wunits;
+
+            CheckOld(oldS);
         }
     }
 }

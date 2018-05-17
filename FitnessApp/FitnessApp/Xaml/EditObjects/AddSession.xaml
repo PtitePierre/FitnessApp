@@ -5,6 +5,11 @@
              Title="Session">
     <ContentPage.Content>
         <StackLayout>
+            <Button x:Name="btn_update"
+                        Text="Update"
+                        HorizontalOptions="Center"
+                        WidthRequest="128"
+                        Clicked="Button_UpDate"/>
             <StackLayout Orientation="Horizontal" >
                 <Label x:Name="lab_SportSess" 
                        Text="Sport type :"
@@ -12,9 +17,14 @@
                 <!-- <Entry x:Name="ent_sportType" /> -->
                 <Picker x:Name="pic_sportType" 
                         HorizontalOptions="EndAndExpand" 
-                        WidthRequest="192"
+                        WidthRequest="128"
                         SelectedIndexChanged="Picker_SelectSport"
                         />
+                <Button x:Name="btn_addsport"
+                        Text="+"
+                        HorizontalOptions="End"
+                        WidthRequest="64"
+                        Clicked="Button_AddSport"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
