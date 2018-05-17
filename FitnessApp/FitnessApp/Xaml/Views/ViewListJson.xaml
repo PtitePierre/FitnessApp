@@ -5,6 +5,11 @@
              Title="Units and Sports">
     <ContentPage.Content>
         <StackLayout>
+            <Button x:Name="btn_update"
+                        Text="Update"
+                        HorizontalOptions="Center"
+                        WidthRequest="128"
+                        Clicked="Button_UpDate"/>
             <Label Text="Known units :"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />

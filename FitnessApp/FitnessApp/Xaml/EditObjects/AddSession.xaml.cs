@@ -69,6 +69,9 @@ namespace FitnessApp
             {
                 pic_unit.SelectedItem = null;
                 pic_sportType.SelectedItem = null;
+                float def = 0;
+                in_weight.Text = def.ToString();
+                pic_weightUnit.SelectedItem = "kg";
 
                 this.session = new Session();
                 edit = false;
@@ -92,6 +95,8 @@ namespace FitnessApp
                 session.SUnit = (Unit)pic_unit.SelectedItem;
                 session.SDate = pic_date.Date + pic_time.Time;
                 session.Done = done;
+                session.Weight = float.Parse(in_weight.Text);
+                session.WUnit = (string)pic_weightUnit.SelectedItem;
                 
                 if (edit)
                     SaveAndLoad.UpDateSession(oldS, session);
@@ -104,7 +109,7 @@ namespace FitnessApp
             {
                 DependencyService.Get<IMessage>().longtime("Incomplete information");
             }
-            SaveAndLoad.LoadSessions(true);
+            //SaveAndLoad.LoadSessions(true);
         }
 
         private void Button_Cancel(object sender, EventArgs e)

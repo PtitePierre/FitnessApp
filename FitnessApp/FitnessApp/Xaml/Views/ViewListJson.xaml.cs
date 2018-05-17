@@ -66,5 +66,17 @@ namespace FitnessApp
             }
             */
         }
+
+        private void Button_UpDate(object sender, EventArgs e)
+        {
+            try
+            {
+                FillListViews();
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<IMessage>().longtime(ex.Message);
+            }
+        }
     }
 }

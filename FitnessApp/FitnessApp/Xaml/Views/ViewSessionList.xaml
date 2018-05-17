@@ -6,7 +6,12 @@
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Here come the list of sessions!"
+            <Button x:Name="btn_update"
+                        Text="Update"
+                        HorizontalOptions="Center"
+                        WidthRequest="128"
+                        Clicked="Button_UpDate"/>
+            <Label Text="Your sessions :"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
 

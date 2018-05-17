@@ -112,5 +112,17 @@ namespace FitnessApp
                 DependencyService.Get<IMessage>().longtime(e.Message);
             }
         }
-	}
+
+        private void Button_UpDate(object sender, EventArgs e)
+        {
+            try
+            {
+                FillListView();
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<IMessage>().longtime(ex.Message);
+            }
+        }
+    }
 }
